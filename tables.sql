@@ -1,19 +1,19 @@
 CREATE TABLE voivodeship
 (
     id                    INTEGER PRIMARY KEY AUTOINCREMENT,
-    creation_date         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    creation_date         TEXT DEFAULT CURRENT_TIMESTAMP,
     name                  TEXT NOT NULL,
     code                  TEXT NOT NULL,
     description           TEXT NOT NULL,
     coat_of_arms_filename TEXT NOT NULL
-);
+) strict;
 
 CREATE TABLE product_type
 (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    creation_date TEXT DEFAULT CURRENT_TIMESTAMP,
     name          TEXT NOT NULL
-);
+) strict ;
 
 CREATE TABLE product
 (
@@ -21,11 +21,11 @@ CREATE TABLE product
     name            TEXT    NOT NULL,
     product_type_id INTEGER NOT NULL,
     voivodeship_id  INTEGER NOT NULL,
-    date_of_entry   DATE    NOT NULL,
-    creation_date   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_of_entry   TEXT    NOT NULL,
+    creation_date   TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_type_id) REFERENCES product_type (id),
     FOREIGN KEY (voivodeship_id) REFERENCES voivodeship (id)
-);
+) strict;
 
 
 INSERT INTO voivodeship (name, code, description, coat_of_arms_filename)
