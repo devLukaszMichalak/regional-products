@@ -43,4 +43,9 @@ class ProductServiceImpl implements ProductService {
                 .map(productMapper::toDto)
                 .toList();
     }
+    
+    @Override
+    public int countProductsOfVoivodeship(Integer voivodeshipId) {
+        return productRepository.countByVoivodeshipId(voivodeshipId);
+    }
 }

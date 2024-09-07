@@ -10,4 +10,5 @@ public interface VoivodeshipService {
     
     VoivodeshipDto getVoivodeshipById(Integer id);
     
+    VoivodeshipDto getVoivodeshipByCode(String code);
 }

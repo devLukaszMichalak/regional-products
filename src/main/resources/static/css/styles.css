@@ -1,0 +1,64 @@
+@font-face {
+    font-family: LTSuperiorMono;
+    src: url('/fonts/LTSuperiorMono-Regular.otf');
+    font-weight: normal;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: LTSuperiorMono, sans-serif !important;
+    font-size: 1rem !important;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+@font-face {
+    font-family: Jaro;
+    src: url('/fonts/Jaro-Regular.woff2');
+    font-weight: normal;
+}
+
+.title-font {
+    font-family: Jaro, fantasy !important;
+    font-size: 2rem !important;
+}
+
+.page-size-constraint {
+    max-width: 1200px;
+}
+
+.coat-of-arms-size {
+    height: 4rem;
+    width: 3.4rem;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+.h-fit {
+    height: fit-content;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.transition-all {
+    transition: all ease-in-out 100ms
+}
+
+.top-1rem {
+    top: 1rem;
+}
+
+.text-wrap-balance {
+    text-wrap: balance;
+}

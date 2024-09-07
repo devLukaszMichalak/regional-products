@@ -1,7 +1,12 @@
 <header th:fragment="header">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand mb-0 h1" th:href="@{/dashboard}">Regional Products</a>
+    <nav class="navbar bg-body-tertiary d-flex justify-content-center px-3">
+        <div class="container-fluid page-size-constraint p-0">
+            <a class="navbar-brand mb-0 h1 title-font" th:href="@{/voivodeships}">Regional Products</a>
+            <div class="border-start border-secondary d-flex flex-column ps-3">
+                <a class="navbar-text p-0" href="https://dane.gov.pl/pl/dataset/450">dataset</a>
+                <a class="navbar-text p-0" href="https://dane.gov.pl/pl/dataset/450">dataset</a>
+            </div>
         </div>
+
     </nav>
 </header>

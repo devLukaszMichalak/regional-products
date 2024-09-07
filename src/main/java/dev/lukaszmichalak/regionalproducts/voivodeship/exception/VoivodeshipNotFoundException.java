@@ -6,7 +6,7 @@ public class VoivodeshipNotFoundException extends RuntimeException {
         super("Nie znaleziono produktu o id: " + id);
     }
     
-    public VoivodeshipNotFoundException(String name) {
-        super("Nie znaleziono produktu o nazwie: " + name);
+    public VoivodeshipNotFoundException(String code) {
+        super("Nie znaleziono produktu o kodzie: " + code);
     }
 }

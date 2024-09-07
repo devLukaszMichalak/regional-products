@@ -24,7 +24,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
     
     @PostConstruct
     void init() {
-        VOIVODESHIP_COUNT =  Long.valueOf(voivodeshipRepository.count()).intValue();
+        VOIVODESHIP_COUNT = Long.valueOf(voivodeshipRepository.count()).intValue();
     }
     
     @Override
@@ -50,6 +50,22 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
                         .map(voivodeshipMapper::toDto)
                         .orElseThrow(() -> new VoivodeshipNotFoundException(key))
         );
+    }
+    
+    @Override
+    public VoivodeshipDto getVoivodeshipByCode(String code) {
+        return cache.values()
+                .stream()
+                .filter(v -> v.code().equals(code))
+                .findFirst()
+                .orElseGet(() -> voivodeshipRepository
+                        .findByCode(code)
+                        .map(voivodeshipMapper::toDto)
+                        .map(v -> {
+                            cache.put(v.id(), v);
+                            return v;
+                        })
+                        .orElseThrow(() -> new VoivodeshipNotFoundException(code)));
     }
     
 }

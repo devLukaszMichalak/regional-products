@@ -10,4 +10,6 @@ interface ProductRepository extends JpaRepository<Product, Integer> {
     Optional<Product> findByName(String name);
     
     List<Product> findByVoivodeshipId(Integer name);
+    
+    int countByVoivodeshipId(Integer id);
 }

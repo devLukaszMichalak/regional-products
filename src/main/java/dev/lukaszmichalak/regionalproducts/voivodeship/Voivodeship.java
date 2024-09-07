@@ -23,8 +23,14 @@ class Voivodeship {
     @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(name = "coat_of_arms_svg", nullable = false)
-    private String coatOfArmsSvg;
+    @Column(name = "code", nullable = false)
+    private String code;
+    
+    @Column(name = "description", nullable = false)
+    private String description;
+    
+    @Column(name = "coat_of_arms_filename", nullable = false)
+    private String coatOfArmsFilename;
     
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
