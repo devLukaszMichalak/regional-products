@@ -13,16 +13,15 @@ class CountRepositoryImpl implements CountRepository {
     private final CountRowMapper countRowMapper;
     private final JdbcTemplate jdbcTemplate;
     
+    private static final String countsSql = """
+            SELECT v.name AS voivodeship_name, COUNT(p.id) AS product_count
+            FROM voivodeship v
+            LEFT JOIN product p ON v.id = p.voivodeship_id
+            GROUP BY v.name;
+            """;
+    
     @Override
     public List<Count> getCounts() {
-        
-        var sql = """
-                SELECT v.name AS voivodeship_name, COUNT(p.id) AS product_count
-                FROM voivodeship v
-                LEFT JOIN product p ON v.id = p.voivodeship_id
-                GROUP BY v.name;
-                """;
-        
-        return jdbcTemplate.query(sql, countRowMapper);
+        return jdbcTemplate.query(countsSql, countRowMapper);
     }
 }
