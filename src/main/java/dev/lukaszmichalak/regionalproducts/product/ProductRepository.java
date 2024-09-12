@@ -11,5 +11,5 @@ interface ProductRepository extends JpaRepository<Product, Integer> {
     
     List<Product> findByVoivodeshipId(Integer name);
     
-    int countByVoivodeshipId(Integer id);
+    long countByVoivodeshipId(Integer id);
 }

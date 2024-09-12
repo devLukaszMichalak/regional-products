@@ -37,7 +37,7 @@
                                  th:alt="'Coat of arms of ' + ${viovodeship.name() + ' voivodesip'}">
                         </a>
 
-                        <div class="d-flex flex-column voivodeship-name-container ms-2 w-100">
+                        <div class="d-flex flex-column ms-2 w-100">
                             <a th:href="@{/voivodeships/{code}(code=${viovodeship.code()})}">
                                 <h3 class="border-bottom border-secondary-subtle link-secondary text-dark border-1 mb-0 transition-all">
                                     <span th:text="${#strings.toUpperCase(viovodeship.name())}"></span>

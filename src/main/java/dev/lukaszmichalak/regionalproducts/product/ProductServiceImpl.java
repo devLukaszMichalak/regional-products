@@ -45,7 +45,7 @@ class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    public int countProductsOfVoivodeship(Integer voivodeshipId) {
+    public long countProductsOfVoivodeship(Integer voivodeshipId) {
         return productRepository.countByVoivodeshipId(voivodeshipId);
     }
 }
