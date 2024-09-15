@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Regional products</title>
+    <title th:text="#{header.title}"></title>
     <meta name="keywords" content="Regional products, Poland">
     <meta name="description" content="Discover regional products of Poland">
 
@@ -31,20 +31,24 @@
             <div>
                 <section class="mb-4 w-100" th:each="viovodeship : ${voivodeships}">
                     <div class="d-flex">
-                        <a th:href="@{/voivodeships/{code}(code=${viovodeship.code()})}">
+                        <a th:href="@{/{lang}/voivodeships/{code}(lang=${lang}, code=${viovodeship.code()})}">
                             <img class="coat-of-arms-size"
-                                 th:src="'images/' + ${viovodeship.coatOfArmsFilename()}"
+                                 th:src="'/images/' + ${viovodeship.coatOfArmsFilename()}"
                                  th:alt="'Coat of arms of ' + ${viovodeship.name() + ' voivodesip'}">
                         </a>
 
                         <div class="d-flex flex-column ms-2 w-100">
-                            <a th:href="@{/voivodeships/{code}(code=${viovodeship.code()})}">
+                            <a th:href="@{/{lang}/voivodeships/{code}(lang=${lang}, code=${viovodeship.code()})}">
                                 <h3 class="border-bottom border-secondary-subtle link-secondary text-dark border-1 mb-0 transition-all">
+                                    <span th:if="${lang} == 'pl'">WOJEWÓDZTWO </span>
                                     <span th:text="${#strings.toUpperCase(viovodeship.name())}"></span>
-                                    <span> VOIVODESHIP</span>
+                                    <span th:if="${lang} == 'en'"> VOIVODESHIP</span>
                                 </h3>
                             </a>
-                            <div class="text-justify mt-2" th:text="${viovodeship.description()}"></div>
+
+                            <div class="text-justify mt-2"
+                                 th:text="${lang} == 'pl' ? ${viovodeship.descriptionPl()} : ${viovodeship.descriptionEn()}">
+                            </div>
                         </div>
                     </div>
 
@@ -54,18 +58,18 @@
             <div class="border-start border-light-subtle ms-5 pe-5"></div>
 
             <aside class="position-sticky top-1rem h-fit">
-                <h5 class="text-wrap-balance">Total number of products for each voivodeship</h5>
+                <h5 class="text-wrap-balance" th:text="#{voivodeships.table.title}"></h5>
                 <table class="table table-bordered light-subtle">
                     <thead class="table-light">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Count</th>
+                        <th scope="col" th:text="#{voivodeships.table.column.name}"></th>
+                        <th scope="col" th:text="#{voivodeships.table.column.count}"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="count : ${counts}">
-                        <td th:text="${count.voivodeshipName()}"></td>
-                        <td th:text="${count.productCount()}"></td>
+                        <td class="py-1 word-break-keep-all" th:text="${count.voivodeshipName()}"></td>
+                        <td class="py-1" th:text="${count.productCount()}"></td>
                     </tr>
                     </tbody>
                 </table>

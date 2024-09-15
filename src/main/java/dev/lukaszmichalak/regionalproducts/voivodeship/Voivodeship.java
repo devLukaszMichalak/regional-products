@@ -26,8 +26,11 @@ class Voivodeship {
     @Column(name = "code", nullable = false)
     private String code;
     
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "description_en", nullable = false)
+    private String descriptionEn;
+    
+    @Column(name = "description_pl", nullable = false)
+    private String descriptionPl;
     
     @Column(name = "coat_of_arms_filename", nullable = false)
     private String coatOfArmsFilename;

@@ -7,28 +7,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/{lang}")
 @RequiredArgsConstructor
-class MainController {
+class VoivodeshipsController {
     
     final VoivodeshipService voivodeshipService;
     final CountService countService;
     
-    @GetMapping
-    public String getDefault() {
-        return "redirect:/voivodeships";
-    }
-    
     @GetMapping("/voivodeships")
     public String getVoivodeships(Model model) {
+        
         model.addAttribute("voivodeships", voivodeshipService.getVoivodeships());
         model.addAttribute("counts", countService.getCounts());
+        
         return "voivodeships";
     }
     
     @GetMapping("/voivodeships/{code}")
-    public String getVoivodeship(Model model, @PathVariable("code") String code) {
+    public String getVoivodeship(Model model,
+                                 @PathVariable("code") String code) {
+        
         return "voivodeship";
     }
 }

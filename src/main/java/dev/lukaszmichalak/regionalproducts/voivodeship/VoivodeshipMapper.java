@@ -14,7 +14,8 @@ class VoivodeshipMapper {
                 voivodeship.getId(),
                 voivodeship.getName(),
                 voivodeship.getCode(),
-                voivodeship.getDescription(),
+                voivodeship.getDescriptionEn(),
+                voivodeship.getDescriptionPl(),
                 voivodeship.getCoatOfArmsFilename()
         );
     }

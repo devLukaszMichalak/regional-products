@@ -62,3 +62,12 @@ a {
 .text-wrap-balance {
     text-wrap: balance;
 }
+
+.word-break-keep-all {
+    word-break: keep-all;
+}
+
+.current-language-link {
+    font-weight: bolder;
+    color: black
+}

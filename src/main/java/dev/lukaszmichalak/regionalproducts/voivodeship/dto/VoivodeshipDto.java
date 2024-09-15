@@ -4,7 +4,8 @@ public record VoivodeshipDto(
         Integer id,
         String name,
         String code,
-        String description,
+        String descriptionEn,
+        String descriptionPl,
         String coatOfArmsFilename
 ) {
 }
