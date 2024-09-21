@@ -31,6 +31,7 @@ class Product {
     @Column(name = "voivodeship_id", nullable = false)
     private Integer voivodeshipId;
     
+    @Convert(converter = DateConverter.class)
     @Column(name = "date_of_entry", nullable = false)
     private LocalDate dateOfEntry;
     

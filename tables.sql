@@ -3,7 +3,7 @@ CREATE TABLE voivodeship
     id                    INTEGER PRIMARY KEY AUTOINCREMENT,
     creation_date         TEXT DEFAULT CURRENT_TIMESTAMP,
     name                  TEXT NOT NULL,
-    code                  TEXT NOT NULL,
+    code                  TEXT NOT NULL UNIQUE,
     description_en        TEXT NOT NULL,
     description_pl        TEXT NOT NULL,
     coat_of_arms_filename TEXT NOT NULL

@@ -4,6 +4,12 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: Jaro;
+    src: url('/fonts/Jaro-Regular.woff2');
+    font-weight: normal;
+}
+
 html {
     height: 100%;
 }
@@ -17,12 +23,6 @@ body {
 
 a {
     text-decoration: none !important;
-}
-
-@font-face {
-    font-family: Jaro;
-    src: url('/fonts/Jaro-Regular.woff2');
-    font-weight: normal;
 }
 
 .title-font {
