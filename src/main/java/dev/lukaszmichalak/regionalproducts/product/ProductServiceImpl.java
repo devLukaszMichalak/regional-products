@@ -50,7 +50,7 @@ class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    public Long getProductsCount() {
+    public long getProductsCount() {
         return productRepository.count();
     }
 }

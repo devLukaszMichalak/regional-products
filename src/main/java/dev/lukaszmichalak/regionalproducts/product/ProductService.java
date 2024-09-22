@@ -16,5 +16,5 @@ public interface ProductService {
     
     long countProductsOfVoivodeship(Integer voivodeshipId);
     
-    Long getProductsCount();
+    long getProductsCount();
 }

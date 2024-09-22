@@ -20,7 +20,7 @@ class CountServiceImpl implements CountService {
     }
     
     @Override
-    public Long getTotalCount() {
+    public long getTotalCount() {
         return productService.getProductsCount();
     }
 }

@@ -8,5 +8,5 @@ public interface CountService {
     
     List<CountDto> getCounts();
     
-    Long getTotalCount();
+    long getTotalCount();
 }
