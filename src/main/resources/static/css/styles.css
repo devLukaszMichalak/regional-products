@@ -71,3 +71,7 @@ a {
     font-weight: bolder;
     color: black
 }
+
+.overflow-hidden {
+    overflow: hidden;
+}

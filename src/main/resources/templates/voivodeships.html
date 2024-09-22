@@ -12,8 +12,8 @@
 
         <div class="w-100 d-flex mb-3">
             <div>
-                <section class="mb-4 w-100" th:each="viovodeship : ${voivodeships}">
-                    <div class="d-flex">
+                <section class="mb-4 w-100 card" th:each="viovodeship : ${voivodeships}">
+                    <div class="d-flex card-body">
                         <a th:href="@{/{lang}/voivodeships/{code}(lang=${lang}, code=${viovodeship.code()})}">
                             <img class="coat-of-arms-size"
                                  th:src="'/images/' + ${viovodeship.coatOfArmsFilename()}"
@@ -42,21 +42,22 @@
 
             <aside class="position-sticky top-1rem h-fit">
                 <h5 class="text-wrap-balance" th:text="#{voivodeships.table.title}"></h5>
-                <table class="table table-bordered light-subtle">
-                    <thead class="table-light">
-                    <tr>
-                        <th scope="col" th:text="#{voivodeships.table.column.name}"></th>
-                        <th scope="col" th:text="#{voivodeships.table.column.count}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="count : ${counts}">
-                        <td class="py-1 word-break-keep-all" th:text="${count.voivodeshipName()}"></td>
-                        <td class="py-1" th:text="${count.productCount()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
+                <div class="overflow-hidden rounded border border-bottom-0 light-subtle">
+                    <table class="table mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col" th:text="#{voivodeships.table.column.name}"></th>
+                            <th scope="col" th:text="#{voivodeships.table.column.count}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="count : ${counts}">
+                            <td class="py-1 word-break-keep-all" th:text="${count.voivodeshipName()}"></td>
+                            <td class="py-1" th:text="${count.productCount()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </aside>
         </div>
     </div>
