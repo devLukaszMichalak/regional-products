@@ -15,4 +15,6 @@ public interface ProductService {
     List<ProductDto> getProductsOfVoivodeship(Integer voivodeshipId);
     
     long countProductsOfVoivodeship(Integer voivodeshipId);
+    
+    Long getProductsCount();
 }

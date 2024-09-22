@@ -8,7 +8,7 @@
 <main class="h-100 w-100 d-flex flex-column align-items-center px-3">
 
     <div class="page-size-constraint w-100">
-        <img class="w-100 mb-3" src="/images/cooking.jpg" alt="Cooking banner">
+        <img class="w-100 mb-3 rounded-bottom" src="/images/cooking.jpg" alt="Cooking banner">
 
         <div class="w-100 d-flex mb-3">
             <div>
@@ -36,24 +36,52 @@
                     </div>
 
                 </section>
+
+                <div class="border-top border-light-subtle mt-4 pb-4"></div>
+
+                <section class="mb-4 w-100 card">
+                    <div class="d-flex card-body">
+                        <a th:href="@{/{lang}/poland(lang=${lang})}">
+                            <img class="coat-of-arms-size"
+                                 src="/images/Coat_of_arms_of_Poland-official.png"
+                                 alt="Coat of arms of Poland">
+                        </a>
+
+                        <div class="d-flex flex-column ms-2 w-100">
+                            <a th:href="@{/{lang}/poland(lang=${lang})}">
+                                <h3 class="border-bottom border-secondary-subtle link-secondary text-dark border-1 mb-0 transition-all">
+                                    <span th:text="#{voivodeships.poland.title}"></span>
+                                </h3>
+                            </a>
+
+                            <div class="text-justify mt-2" th:text="#{voivodeships.poland.description}"></div>
+                        </div>
+                    </div>
+
+                </section>
+
             </div>
 
             <div class="border-start border-light-subtle ms-5 pe-5"></div>
 
             <aside class="position-sticky top-1rem h-fit">
                 <h5 class="text-wrap-balance" th:text="#{voivodeships.table.title}"></h5>
-                <div class="overflow-hidden rounded border border-bottom-0 light-subtle">
+                <div class="overflow-hidden rounded border border-bottom-0">
                     <table class="table mb-0">
                         <thead class="table-light">
                         <tr>
                             <th scope="col" th:text="#{voivodeships.table.column.name}"></th>
-                            <th scope="col" th:text="#{voivodeships.table.column.count}"></th>
+                            <th scope="col" class="border-start" th:text="#{voivodeships.table.column.count}"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="count : ${counts}">
                             <td class="py-1 word-break-keep-all" th:text="${count.voivodeshipName()}"></td>
-                            <td class="py-1" th:text="${count.productCount()}"></td>
+                            <td class="py-1 border-start" th:text="${count.productCount()}"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-1 fw-bolder" th:text="#{voivodeships.table.row.sum}"></td>
+                            <td class="py-1 fw-bolder border-start" th:text="${totalCount}"></td>
                         </tr>
                         </tbody>
                     </table>

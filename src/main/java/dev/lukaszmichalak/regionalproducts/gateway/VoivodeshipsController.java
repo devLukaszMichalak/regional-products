@@ -25,6 +25,7 @@ class VoivodeshipsController {
         
         model.addAttribute("voivodeships", voivodeshipService.getVoivodeships());
         model.addAttribute("counts", countService.getCounts());
+        model.addAttribute("totalCount", countService.getTotalCount());
         
         return "voivodeships";
     }
