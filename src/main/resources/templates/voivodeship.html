@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head :: head}"></head>
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script th:src="@{/js/search-box.js}"></script>
+</head>
 
 <body>
 
@@ -9,22 +12,31 @@
 <main class="h-100 w-100 d-flex flex-column align-items-center px-3">
 
     <div class="page-size-constraint w-100">
-        <table class="table table-bordered light-subtle mb-0">
-            <thead class="table-light">
-            <tr>
-                <th scope="col" th:text="#{voivodeship.table.column.name}"></th>
-                <th scope="col" th:text="#{voivodeship.table.column.productTypeName}"></th>
-                <th scope="col" th:text="#{voivodeship.table.column.dateOfEntry}"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product : ${products}">
-                <td class="py-1 word-break-keep-all" th:text="${product.name()}"></td>
-                <td class="py-1" th:text="${product.productTypeName()}"></td>
-                <td class="py-1" th:text="${product.dateOfEntry()}"></td>
-            </tr>
-            </tbody>
-        </table>
+
+        <div th:replace="~{fragments/search-box :: search-box}"></div>
+
+        <div class="overflow-hidden rounded border border-bottom-0 mb-3">
+            <table class="table mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th scope="col" class="w-40" th:text="#{voivodeship.table.column.name}"></th>
+                    <th scope="col" class="w-40" th:text="#{voivodeship.table.column.productTypeName}"></th>
+                    <th scope="col" class="w-20" th:text="#{voivodeship.table.column.dateOfEntry}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td class="py-1" th:text="${product.name()}"></td>
+                    <td class="py-1" th:text="${product.productTypeName()}"></td>
+                    <td class="py-1" th:text="${product.dateOfEntry()}"></td>
+                </tr>
+                <tr id="no-results-row" class="d-none">
+                    <td colspan="3" class="py-1 text-center">Brak wyników wyszukiwania</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </main>

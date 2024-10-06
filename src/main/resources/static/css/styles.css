@@ -43,6 +43,14 @@ a {
     width: 60% !important;
 }
 
+.w-40 {
+    width: 40% !important;
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
 .h-fit {
     height: fit-content;
 }
