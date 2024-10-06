@@ -30,6 +30,10 @@ a {
     font-size: 2rem !important;
 }
 
+.min-content-height {
+    min-height: calc(100vh - 7.65rem);
+}
+
 .page-size-constraint {
     max-width: 1200px;
 }
