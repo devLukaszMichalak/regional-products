@@ -7,15 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 class ProductMapper {
-    
-    ProductDto toDto(Product product) {
-        
-        return new ProductDto(
-                product.getName(),
-                product.getProductType().getName(),
-                product.getDateOfEntry()
-        );
-    }
+
+  ProductDto toDto(Product product) {
+
+    return new ProductDto(
+        product.getName(), product.getProductType().getName(), product.getDateOfEntry());
+  }
 }
-
-

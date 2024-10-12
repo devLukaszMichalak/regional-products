@@ -15,37 +15,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/{lang}")
 @RequiredArgsConstructor
 class VoivodeshipsController {
-    
-    final VoivodeshipService voivodeshipService;
-    final ProductService productService;
-    final CountService countService;
-    
-    @GetMapping("/voivodeships")
-    public String getVoivodeships(Model model) {
-        
-        model.addAttribute("voivodeships", voivodeshipService.getVoivodeships());
-        model.addAttribute("counts", countService.getCounts());
-        model.addAttribute("totalCount", countService.getTotalCount());
-        
-        return "voivodeships";
-    }
-    
-    @GetMapping("/voivodeships/{code}")
-    public String getVoivodeship(Model model,
-                                 @PathVariable("code") String code) {
-        
-        VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(code);
-        
-        model.addAttribute("products", productService.getProductsOfVoivodeship(voivodeship.id()));
-        
-        return "voivodeship";
-    }
-    
-    @GetMapping("/poland")
-    public String getPoland(Model model) {
-        
-        model.addAttribute("products", productService.getProducts());
-        
-        return "voivodeship";
-    }
+
+  final VoivodeshipService voivodeshipService;
+  final ProductService productService;
+  final CountService countService;
+
+  @GetMapping("/voivodeships")
+  public String getVoivodeships(Model model) {
+
+    model.addAttribute("voivodeships", voivodeshipService.getVoivodeships());
+    model.addAttribute("counts", countService.getCounts());
+    model.addAttribute("totalCount", countService.getTotalCount());
+
+    return "voivodeships";
+  }
+
+  @GetMapping("/voivodeships/{code}")
+  public String getVoivodeship(Model model, @PathVariable("code") String code) {
+
+    VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(code);
+
+    model.addAttribute("products", productService.getProductsOfVoivodeship(voivodeship.id()));
+
+    return "voivodeship";
+  }
+
+  @GetMapping("/poland")
+  public String getPoland(Model model) {
+
+    model.addAttribute("products", productService.getProducts());
+
+    return "voivodeship";
+  }
 }

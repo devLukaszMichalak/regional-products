@@ -79,11 +79,18 @@ a {
     word-break: keep-all;
 }
 
-.current-language-link {
-    font-weight: bolder;
-    color: black
+.overflow-clip {
+    overflow: clip;
 }
 
-.overflow-hidden {
-    overflow: hidden;
+.min-w-min-content {
+    min-width: min-content;
+}
+
+.focus-black-shadow:focus {
+    box-shadow: 0 0 0 .25rem rgba(5, 1, 1, 0.25) !important
+}
+
+.focus-border-dark:focus {
+    border-color: rgba(var(--bs-dark-rgb), var(--bs-border-opacity)) !important
 }

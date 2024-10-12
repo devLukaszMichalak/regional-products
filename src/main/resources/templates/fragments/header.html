@@ -1,5 +1,5 @@
 <header th:fragment="header">
-    <nav class="navbar bg-body-tertiary d-flex justify-content-center px-3">
+    <nav class="navbar bg-body-tertiary d-flex justify-content-center px-3 shadow">
         <div class="container-fluid page-size-constraint p-0">
             <a class="navbar-brand mb-0 h1 title-font"
                th:href="@{/{lang}/voivodeships(lang=${lang})}"
@@ -8,13 +8,13 @@
 
             <div class="border-start border-secondary d-flex flex-column ps-3">
 
-                <a class="navbar-text p-0"
-                   th:classappend="${lang} == 'en' ? 'current-language-link' : ''"
+                <a class="navbar-text p-0 transition-all"
+                   th:classappend="${lang} == 'en' ? 'fw-bolder link-dark' : 'link-secondary'"
                    th:href="${currentEnUrl}">en
                 </a>
 
-                <a class="navbar-text p-0"
-                   th:classappend="${lang} == 'pl' ? 'current-language-link' : ''"
+                <a class="navbar-text p-0 transition-all"
+                   th:classappend="${lang} == 'pl' ? 'fw-bolder link-dark' : 'link-secondary'"
                    th:href="${currentPlUrl}">pl
                 </a>
 

@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 class DefaultController {
-    
-    @GetMapping()
-    public String getDefault() {
-        return "redirect:/en/voivodeships";
-    }
+
+  @GetMapping()
+  public String getDefault() {
+    return "redirect:/en/voivodeships";
+  }
 }

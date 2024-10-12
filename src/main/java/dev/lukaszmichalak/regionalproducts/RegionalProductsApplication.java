@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class RegionalProductsApplication {
-    
-    public static void main(String[] args) {
-        SpringApplication.run(RegionalProductsApplication.class, args);
-    }
-    
+
+  public static void main(String[] args) {
+    SpringApplication.run(RegionalProductsApplication.class, args);
+  }
 }
