@@ -35,6 +35,7 @@ class VoivodeshipsController {
 
     VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(code);
 
+    model.addAttribute("voivodeshipCode", voivodeship.code());
     model.addAttribute("products", productService.getProductsOfVoivodeship(voivodeship.id()));
 
     return "voivodeship";
@@ -43,6 +44,7 @@ class VoivodeshipsController {
   @GetMapping("/poland")
   public String getPoland(Model model) {
 
+    model.addAttribute("voivodeshipCode", null);
     model.addAttribute("products", productService.getProducts());
 
     return "voivodeship";
