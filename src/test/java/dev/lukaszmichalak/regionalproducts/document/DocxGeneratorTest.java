@@ -9,6 +9,7 @@ class DocxGeneratorTest {
 
   @Test
   void createForVoivodeship() {
+    //todo assert something
     docxGenerator.createForVoivodeship(new GetDocumentCommand("pl", "DS"));
   }
 }

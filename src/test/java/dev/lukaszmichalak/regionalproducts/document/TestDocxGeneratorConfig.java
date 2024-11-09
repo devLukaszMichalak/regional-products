@@ -11,12 +11,12 @@ public class TestDocxGeneratorConfig {
 
     ProductService productService = TestProductConfig.productService();
     VoivodeshipService voivodeshipService = TestVoivodeshipConfig.voivodeshipService();
+    PolandDescriptionService polandDescriptionService = new TestPolandDescriptionService();
 
-    return new DocxGenerator(
-        productService, voivodeshipService, new TestPolandDescriptionService());
+    return new DocxGenerator(productService, voivodeshipService, polandDescriptionService);
   }
 
-  static class TestPolandDescriptionService implements PolandDescriptionService {
+  private static class TestPolandDescriptionService implements PolandDescriptionService {
 
     @Override
     public String getPl() {

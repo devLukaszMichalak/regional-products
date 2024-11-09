@@ -3,6 +3,9 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
 import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,30 +23,53 @@ class DocumentController {
   }
 
   @GetMapping("/docx/all")
-  public String getDocx(@PathVariable("lang") String lang) {
+  public ResponseEntity<byte[]> getDocx(@PathVariable("lang") String lang) {
+    byte[] documentBytes = docxGenerator.createForAll(lang);
 
-    docxGenerator.createForAll(lang);
-    return "all docx";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_DOCX);
+
+    return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
 
   @GetMapping("/pdf/all")
-  public String getPdf(@PathVariable("lang") String lang) {
+  public ResponseEntity<byte[]> getPdf(@PathVariable("lang") String lang) {
+    byte[] documentBytes = pdfGenerator.createForAll(lang);
 
-    pdfGenerator.createForAll(lang);
-    return "all pdf";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_PDF);
+
+    return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
 
   @GetMapping("/docx/voivodeship/{code}")
-  public String getDocx(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getDocx(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+    byte[] documentBytes = docxGenerator.createForVoivodeship(cmd);
 
-    docxGenerator.createForVoivodeship(cmd);
-    return "docx";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_DOCX);
+
+    return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
 
   @GetMapping("/pdf/voivodeship/{code}")
-  public String getPdf(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getPdf(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+    byte[] documentBytes = pdfGenerator.createForVoivodeship(cmd);
 
-    pdfGenerator.createForVoivodeship(cmd);
-    return "pdf";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_PDF);
+
+    return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
+  }
+
+  private static final class MediaType extends org.springframework.http.MediaType {
+
+    private static final org.springframework.http.MediaType APPLICATION_DOCX =
+        MediaType.valueOf(
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+
+    public MediaType(String type) {
+      super(type);
+    }
   }
 }

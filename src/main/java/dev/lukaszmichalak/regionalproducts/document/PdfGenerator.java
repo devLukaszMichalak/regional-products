@@ -14,13 +14,12 @@ class PdfGenerator implements DocumentGenerator {
   private final VoivodeshipService voivodeshipService;
 
   @Override
-  public void createForVoivodeship(GetDocumentCommand cmd) {
-    System.out.println("pdf");
-    
+  public byte[] createForVoivodeship(GetDocumentCommand cmd) {
+    return new byte[0];
   }
-  
+
   @Override
-  public void createForAll(String lang) {
-  
+  public byte[] createForAll(String lang) {
+    return new byte[0];
   }
 }

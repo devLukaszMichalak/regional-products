@@ -6,6 +6,8 @@ import dev.lukaszmichalak.regionalproducts.product.ProductService;
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
 import dev.lukaszmichalak.regionalproducts.voivodeship.dto.VoivodeshipDto;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
@@ -20,7 +22,7 @@ class DocxGenerator implements DocumentGenerator {
   private final PolandDescriptionService polandDescriptionService;
 
   @Override
-  public void createForVoivodeship(GetDocumentCommand cmd) {
+  public byte[] createForVoivodeship(GetDocumentCommand cmd) {
 
     VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(cmd.code());
     List<ProductDto> products = productService.getProductsOfVoivodeship(voivodeship.id());
@@ -32,13 +34,15 @@ class DocxGenerator implements DocumentGenerator {
           document, isPL(cmd.lang()) ? voivodeship.descriptionPl() : voivodeship.descriptionEn());
       addProductTable(document, products, cmd.lang());
 
+      return getDocumentBytes(document);
+
     } catch (Exception e) {
       throw new DocumentGenerationException(e);
     }
   }
 
   @Override
-  public void createForAll(String lang) {
+  public byte[] createForAll(String lang) {
 
     List<ProductDto> products = productService.getProducts();
 
@@ -49,6 +53,8 @@ class DocxGenerator implements DocumentGenerator {
           document,
           isPL(lang) ? polandDescriptionService.getPl() : polandDescriptionService.getEn());
       addProductTable(document, products, lang);
+
+      return getDocumentBytes(document);
 
     } catch (Exception e) {
       throw new DocumentGenerationException(e);
@@ -95,6 +101,12 @@ class DocxGenerator implements DocumentGenerator {
     row.getCell(0).setText(product.name());
     row.getCell(1).setText(product.productTypeName());
     row.getCell(2).setText(product.dateOfEntry().toString());
+  }
+
+  private byte[] getDocumentBytes(XWPFDocument document) throws IOException {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    document.write(outputStream);
+    return outputStream.toByteArray();
   }
 
   private boolean isPL(String lang) {
