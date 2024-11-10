@@ -2,7 +2,9 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
 import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_DOCX);
 
+    var filename = "PL-" + LocalDateTime.now() + ".docx";
+    headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
+
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
 
@@ -38,6 +43,9 @@ class DocumentController {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PDF);
+
+    var filename = "PL-" + LocalDateTime.now() + ".pdf";
+    headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
@@ -49,6 +57,9 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_DOCX);
 
+    var filename = cmd.code() + "-" + LocalDateTime.now() + ".docx";
+    headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
+
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
 
@@ -58,6 +69,9 @@ class DocumentController {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PDF);
+
+    var filename = cmd.code() + "-" + LocalDateTime.now() + ".pdf";
+    headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
   }
