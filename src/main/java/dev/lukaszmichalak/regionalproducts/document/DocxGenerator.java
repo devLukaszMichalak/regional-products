@@ -7,7 +7,6 @@ import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
 import dev.lukaszmichalak.regionalproducts.voivodeship.dto.VoivodeshipDto;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
@@ -27,14 +26,16 @@ class DocxGenerator implements DocumentGenerator {
     VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(cmd.code());
     List<ProductDto> products = productService.getProductsOfVoivodeship(voivodeship.id());
 
-    try (XWPFDocument document = new XWPFDocument()) {
+    try (XWPFDocument document = new XWPFDocument();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
 
       addTitle(document, voivodeship.name());
       addDescription(
           document, isPL(cmd.lang()) ? voivodeship.descriptionPl() : voivodeship.descriptionEn());
       addProductTable(document, products, cmd.lang());
 
-      return getDocumentBytes(document);
+      document.write(outputStream);
+      return outputStream.toByteArray();
 
     } catch (Exception e) {
       throw new DocumentGenerationException(e);
@@ -46,7 +47,8 @@ class DocxGenerator implements DocumentGenerator {
 
     List<ProductDto> products = productService.getProducts();
 
-    try (XWPFDocument document = new XWPFDocument()) {
+    try (XWPFDocument document = new XWPFDocument();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
 
       addTitle(document, isPL(lang) ? "Polska" : "Poland");
       addDescription(
@@ -54,7 +56,8 @@ class DocxGenerator implements DocumentGenerator {
           isPL(lang) ? polandDescriptionService.getPl() : polandDescriptionService.getEn());
       addProductTable(document, products, lang);
 
-      return getDocumentBytes(document);
+      document.write(outputStream);
+      return outputStream.toByteArray();
 
     } catch (Exception e) {
       throw new DocumentGenerationException(e);
@@ -101,12 +104,6 @@ class DocxGenerator implements DocumentGenerator {
     row.getCell(0).setText(product.name());
     row.getCell(1).setText(product.productTypeName());
     row.getCell(2).setText(product.dateOfEntry().toString());
-  }
-
-  private byte[] getDocumentBytes(XWPFDocument document) throws IOException {
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    document.write(outputStream);
-    return outputStream.toByteArray();
   }
 
   private boolean isPL(String lang) {
