@@ -11,27 +11,27 @@ import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
 import org.junit.jupiter.api.Test;
 
-class DocxGeneratorTest {
+class PdfGeneratorTest {
 
-  private final DocumentGenerator docxGenerator = TestDocumentGeneratorConfig.docxGenerator();
+  private final DocumentGenerator pdfGenerator = TestDocumentGeneratorConfig.pdfGenerator();
   private final Tika tika = new Tika();
 
-  private static final Path EXPECTED_DOCX_PATH = Path.of("src/test/resources/docx/DS.docx");
+  private static final Path EXPECTED_PDF_PATH = Path.of("src/test/resources/pdf/DS.pdf");
   private static final boolean OVERRIDE_TEST_FILE = false;
 
   @Test
   void createForVoivodeship() throws TikaException, IOException {
 
-    byte[] docx = docxGenerator.createForVoivodeship(new GetDocumentCommand("pl", "DS"));
-    String docxString = tika.parseToString(new ByteArrayInputStream(docx));
+    byte[] pdf = pdfGenerator.createForVoivodeship(new GetDocumentCommand("pl", "DS"));
+    String pdfString = tika.parseToString(new ByteArrayInputStream(pdf));
 
     if (OVERRIDE_TEST_FILE) {
-      Files.write(EXPECTED_DOCX_PATH, docx);
+      Files.write(EXPECTED_PDF_PATH, pdf);
     }
 
-    byte[] expectedDocx = Files.readAllBytes(EXPECTED_DOCX_PATH);
-    String expectedDocxString = tika.parseToString(new ByteArrayInputStream(expectedDocx));
+    byte[] expectedPdf = Files.readAllBytes(EXPECTED_PDF_PATH);
+    String expectedPdfString = tika.parseToString(new ByteArrayInputStream(expectedPdf));
 
-    assertThat(docxString).isEqualTo(expectedDocxString);
+    assertThat(pdfString).isEqualTo(expectedPdfString);
   }
 }
