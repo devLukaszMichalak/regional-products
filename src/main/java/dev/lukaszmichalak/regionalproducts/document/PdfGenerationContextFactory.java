@@ -24,10 +24,12 @@ class PdfGenerationContextFactory {
   private final VoivodeshipService voivodeshipService;
   private final PolandDescriptionService polandDescriptionService;
 
-  private static final InputStream NEUTRAL_SANS_REGULAR =
-      PdfGenerator.class.getResourceAsStream("/static/fonts/NeutralSans-Regular.ttf");
-  private static final InputStream NEUTRAL_SANS_BOLD =
-      PdfGenerator.class.getResourceAsStream("/static/fonts/NeutralSans-Bold.ttf");
+  private final InputStream NEUTRAL_SANS_REGULAR =
+      PdfGenerationContextFactory.class.getResourceAsStream(
+          "/static/fonts/NeutralSans-Regular.ttf");
+
+  private final InputStream NEUTRAL_SANS_BOLD =
+      PdfGenerationContextFactory.class.getResourceAsStream("/static/fonts/NeutralSans-Bold.ttf");
 
   PdfGenerationContext forVoivodeship(PDDocument document, GetDocumentCommand cmd)
       throws IOException {

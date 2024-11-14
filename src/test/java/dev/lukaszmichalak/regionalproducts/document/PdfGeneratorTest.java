@@ -9,27 +9,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PdfGeneratorTest {
 
   private final DocumentGenerator pdfGenerator = TestDocumentGeneratorConfig.pdfGenerator();
   private final Tika tika = new Tika();
 
-  private static final Path EXPECTED_PDF_PATH = Path.of("src/test/resources/pdf/DS.pdf");
+  private static final String EXPECTED_PDF_PATH_TEMPLATE = "src/test/resources/pdf/{lang}/DS.pdf";
   private static final boolean OVERRIDE_TEST_FILE = false;
 
-  @Test
-  void createForVoivodeship() throws TikaException, IOException {
+  @ParameterizedTest
+  @ValueSource(strings = {"pl", "en"})
+  void createForVoivodeship(String lang) throws TikaException, IOException {
 
-    byte[] pdf = pdfGenerator.createForVoivodeship(new GetDocumentCommand("pl", "DS"));
+    byte[] pdf = pdfGenerator.createForVoivodeship(new GetDocumentCommand(lang, "DS"));
     String pdfString = tika.parseToString(new ByteArrayInputStream(pdf));
 
+    var expectedPdfPath = Path.of(EXPECTED_PDF_PATH_TEMPLATE.replace("{lang}", lang));
+
     if (OVERRIDE_TEST_FILE) {
-      Files.write(EXPECTED_PDF_PATH, pdf);
+      Files.write(expectedPdfPath, pdf);
     }
 
-    byte[] expectedPdf = Files.readAllBytes(EXPECTED_PDF_PATH);
+    byte[] expectedPdf = Files.readAllBytes(expectedPdfPath);
     String expectedPdfString = tika.parseToString(new ByteArrayInputStream(expectedPdf));
 
     assertThat(pdfString).isEqualTo(expectedPdfString);
