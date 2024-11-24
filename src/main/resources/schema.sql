@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS product_type
 CREATE TABLE IF NOT EXISTS product
 (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    name            TEXT    NOT NULL UNIQUE,
+    name            TEXT    NOT NULL,
     product_type_id INTEGER NOT NULL,
     voivodeship_id  INTEGER NOT NULL,
     date_of_entry   TEXT    NOT NULL,
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS product
     CHECK (trim(name) != ''),
     FOREIGN KEY (product_type_id) REFERENCES product_type (id),
     FOREIGN KEY (voivodeship_id) REFERENCES voivodeship (id),
+    UNIQUE(name, product_type_id, voivodeship_id),
     CHECK (trim(date_of_entry) != ''),
     CHECK (trim(creation_date) != ''),
     CHECK (date_of_entry <= creation_date),
