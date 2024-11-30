@@ -16,4 +16,3 @@ final class PdfGenerationContext {
 
   @Setter private float lastElementY = PDRectangle.A4.getHeight();
 }
-

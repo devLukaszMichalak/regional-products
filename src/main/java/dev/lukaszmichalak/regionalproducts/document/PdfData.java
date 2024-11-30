@@ -1,7 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.document;
 
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
-
 import java.util.List;
 
 record PdfData(
