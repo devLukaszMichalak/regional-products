@@ -9,7 +9,7 @@
 <main class="h-100 w-100 d-flex flex-column align-items-center px-3">
 
     <div class="page-size-constraint w-100">
-        <img class="w-100 mb-3 rounded-bottom-4" src="/images/cooking.jpg" alt="Cooking banner">
+        <img class="w-100 mb-3 rounded-bottom-4" src="/images/cooking.jpg" alt="Cooking banner"/>
 
         <div class="w-100 d-flex mb-3">
             <div>
@@ -18,7 +18,7 @@
                         <a th:href="@{/{lang}/voivodeships/{code}(lang=${lang}, code=${viovodeship.code()})}">
                             <img class="coat-of-arms-size"
                                  th:src="'/images/' + ${viovodeship.coatOfArmsFilename()}"
-                                 th:alt="'Coat of arms of ' + ${viovodeship.name() + ' voivodesip'}">
+                                 th:alt="'Coat of arms of ' + ${viovodeship.name() + ' voivodesip'}"/>
                         </a>
 
                         <div class="d-flex flex-column ms-2 w-100">
@@ -45,7 +45,7 @@
                         <a th:href="@{/{lang}/poland(lang=${lang})}">
                             <img class="coat-of-arms-size"
                                  src="/images/Coat_of_arms_of_Poland-official.png"
-                                 alt="Coat of arms of Poland">
+                                 alt="Coat of arms of Poland"/>
                         </a>
 
                         <div class="d-flex flex-column ms-2 w-100">

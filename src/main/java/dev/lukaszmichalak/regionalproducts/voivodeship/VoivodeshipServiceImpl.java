@@ -56,12 +56,12 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
   @Override
   public VoivodeshipDto getVoivodeshipByCode(String code) {
     return cache.values().stream()
-        .filter(v -> v.code().equals(code))
+        .filter(v -> v.code().equalsIgnoreCase(code))
         .findFirst()
         .orElseGet(
             () ->
                 voivodeshipRepository
-                    .findByCode(code)
+                    .findByCodeIgnoreCase(code)
                     .map(voivodeshipMapper::toDto)
                     .map(
                         v -> {

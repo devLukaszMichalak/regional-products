@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 interface VoivodeshipRepository extends JpaRepository<Voivodeship, Integer> {
 
-  Optional<Voivodeship> findByCode(String code);
+  Optional<Voivodeship> findByCodeIgnoreCase(String code);
 }

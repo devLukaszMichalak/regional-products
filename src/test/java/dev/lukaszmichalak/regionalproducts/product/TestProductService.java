@@ -18,27 +18,8 @@ class TestProductService implements ProductService {
   private static final Map<Integer, Product> products = new HashMap<>();
 
   static {
-    var p1 =
-        new Product(
-            1,
-            "Miód wrzosowy z Borów Dolnośląskich",
-            new ProductType(1, "Miody", LocalDateTime.of(2024, 1, 1, 12, 0)),
-            1,
-            LocalDate.of(2024, 1, 1),
-            LocalDateTime.of(2024, 1, 1, 12, 0));
-
-    var p2 =
-        new Product(
-            2,
-            "Wino śląskie",
-            new ProductType(
-                2, "Napoje (alkoholowe i bezalkoholowe)", LocalDateTime.of(2024, 1, 1, 12, 0)),
-            1,
-            LocalDate.of(2024, 1, 1),
-            LocalDateTime.of(2024, 1, 1, 12, 0));
-
-    products.put(1, p1);
-    products.put(2, p2);
+    products.put(1, ProductStub.honey);
+    products.put(2, ProductStub.wine);
   }
 
   @Override
