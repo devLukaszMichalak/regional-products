@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(VoivodeshipsController.class)
-@Import(VoivodeshipsControllerTest.TestVoivodeshipControllerConfig.class)
-class VoivodeshipsControllerTest {
+@Import(VoivodeshipsControllerBeanConfigTest.TestVoivodeshipControllerConfig.class)
+class VoivodeshipsControllerBeanConfigTest {
 
   @Autowired private MockMvc mockMvc;
 

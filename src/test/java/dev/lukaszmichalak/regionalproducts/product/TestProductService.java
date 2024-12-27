@@ -2,8 +2,6 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.product.exception.ProductNotFoundException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

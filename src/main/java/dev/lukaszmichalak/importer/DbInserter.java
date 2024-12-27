@@ -1,7 +1,5 @@
 package dev.lukaszmichalak.importer;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +7,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 class DbInserter {
