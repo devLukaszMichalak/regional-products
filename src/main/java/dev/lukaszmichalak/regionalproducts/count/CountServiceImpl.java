@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class CountServiceImpl implements CountService {
 
-  final CountRepository countRepository;
-  final ProductService productService;
+  private final CountRepository countRepository;
+  private final ProductService productService;
 
   @Override
   public List<CountDto> getCounts() {
