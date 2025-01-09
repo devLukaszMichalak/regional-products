@@ -1,4 +1,4 @@
-package dev.lukaszmichalak.regionalproducts.product;
+package dev.lukaszmichalak.regionalproducts.common;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Converter()
-class DateConverter implements AttributeConverter<LocalDate, String> {
+public class LocalDateConverter implements AttributeConverter<LocalDate, String> {
 
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

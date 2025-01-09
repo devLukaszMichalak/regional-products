@@ -2,6 +2,7 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.count.CountService;
 import dev.lukaszmichalak.regionalproducts.product.ProductService;
+import dev.lukaszmichalak.regionalproducts.statistics.StatisticsPerDay;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
 import dev.lukaszmichalak.regionalproducts.voivodeship.dto.VoivodeshipDto;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 class VoivodeshipsController {
 
-  final VoivodeshipService voivodeshipService;
-  final ProductService productService;
-  final CountService countService;
+  private final VoivodeshipService voivodeshipService;
+  private final ProductService productService;
+  private final CountService countService;
 
   @GetMapping("/voivodeships")
   public String getVoivodeships(Model model) {
@@ -30,6 +31,7 @@ class VoivodeshipsController {
     return "voivodeships";
   }
 
+  @StatisticsPerDay
   @GetMapping("/voivodeships/{code}")
   public String getVoivodeship(Model model, @PathVariable("code") String code) {
 

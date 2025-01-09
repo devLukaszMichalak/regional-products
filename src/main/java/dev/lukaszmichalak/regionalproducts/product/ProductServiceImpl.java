@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class ProductServiceImpl implements ProductService {
 
-  final ProductRepository productRepository;
-  final ProductMapper productMapper;
+  private final ProductRepository productRepository;
+  private final ProductMapper productMapper;
 
   @Override
   public ProductDto getProductById(Integer id) {
