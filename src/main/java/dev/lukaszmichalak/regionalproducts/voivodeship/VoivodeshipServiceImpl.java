@@ -8,16 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+@Lazy
 @Service
 @RequiredArgsConstructor
 class VoivodeshipServiceImpl implements VoivodeshipService {
 
   private static int VOIVODESHIP_COUNT = 16;
 
-  final VoivodeshipRepository voivodeshipRepository;
-  final VoivodeshipMapper voivodeshipMapper;
+  private final VoivodeshipRepository voivodeshipRepository;
+  private final VoivodeshipMapper voivodeshipMapper;
 
   private final Map<Integer, VoivodeshipDto> cache = new ConcurrentHashMap<>();
 
