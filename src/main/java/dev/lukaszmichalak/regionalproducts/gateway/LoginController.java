@@ -1,9 +1,11 @@
 package dev.lukaszmichalak.regionalproducts.gateway;
 
+import dev.lukaszmichalak.regionalproducts.gateway.command.LogInCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +24,11 @@ class LoginController {
   }
 
   @PostMapping()
-  public String login(
-      @PathVariable String lang, @RequestParam String username, @RequestParam String password) {
-
-    var auth = new UsernamePasswordAuthenticationToken(username, password);
+  public String login(@PathVariable String lang, @ModelAttribute LogInCommand cmd) {
+  
     try {
-      authenticationManager.authenticate(auth);
+      Authentication authenticated = authenticationManager.authenticate(cmd.getAuth());
+      SecurityContextHolder.getContext().setAuthentication(authenticated);
     } catch (AuthenticationException e) {
       return "redirect:/" + lang + "/login?hadError=true";
     }
