@@ -39,7 +39,15 @@ class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "/rank")
                     .authenticated()
                     .anyRequest()
-                    .permitAll());
+                    .permitAll())
+        .formLogin(
+            formLogin -> {
+              formLogin
+                  .loginPage("/login")
+                  .loginProcessingUrl("/login")
+                  .successHandler(new AuthenticationSuccessHandler())
+                  .failureHandler(new AuthenticationFailureHandler());
+            });
 
     return http.build();
   }
