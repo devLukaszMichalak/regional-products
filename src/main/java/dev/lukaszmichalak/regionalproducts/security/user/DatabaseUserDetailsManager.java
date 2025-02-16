@@ -43,7 +43,7 @@ class DatabaseUserDetailsManager implements UserDetailsManager {
   }
 
   @Override
-  public User loadUserByUsername(String username) throws UsernameNotFoundException {
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     return userRepository
         .findUserByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException(username));

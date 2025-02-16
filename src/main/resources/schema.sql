@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS product
     voivodeship_id  INTEGER NOT NULL,
     date_of_entry   TEXT    NOT NULL,
     creation_date   TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    average_rating   REAL    NOT NULL DEFAULT 0.0,
     CHECK (TRIM(name) != ''),
     FOREIGN KEY (product_type_id) REFERENCES product_type (id),
     FOREIGN KEY (voivodeship_id) REFERENCES voivodeship (id),
@@ -43,7 +44,9 @@ CREATE TABLE IF NOT EXISTS product
     CHECK (TRIM(date_of_entry) != ''),
     CHECK (TRIM(creation_date) != ''),
     CHECK (date_of_entry <= creation_date),
-    CHECK (date_of_entry >= '1900-01-01')
+    CHECK (date_of_entry >= '1900-01-01'),
+    CHECK (product.average_rating >= 1 or product.average_rating == 0),
+    CHECK (product.average_rating <= 5)
 ) strict;
 
 CREATE TABLE IF NOT EXISTS statistics
@@ -67,3 +70,15 @@ CREATE TABLE IF NOT EXISTS users
 ) strict;
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users (username);
+
+CREATE TABLE IF NOT EXISTS ratings
+(
+    id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id    TEXT    NOT NULL UNIQUE,
+    product_id TEXT    NOT NULL UNIQUE,
+    rating     INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES product (id),
+    CHECK (ratings.rating >= 1 or ratings.rating == 0),
+    CHECK (ratings.rating <= 5)
+) strict;

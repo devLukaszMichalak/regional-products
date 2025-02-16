@@ -37,7 +37,7 @@ class DbInserter {
     Optional.ofNullable(dataCache.voivodeshipMap().get(excelProduct.voivodeship()))
         .ifPresentOrElse(
             voivodeshipId -> {
-              int productTypeId = insertProductType(dataCache.productTypeMap(), excelProduct);
+              long productTypeId = insertProductType(dataCache.productTypeMap(), excelProduct);
               insertProduct(excelProduct, productTypeId, voivodeshipId);
             },
             () -> {
@@ -46,12 +46,12 @@ class DbInserter {
             });
   }
 
-  private void insertProduct(ExcelProduct excelProduct, int productTypeId, Integer voivodeshipId) {
+  private void insertProduct(ExcelProduct excelProduct, long productTypeId, Long voivodeshipId) {
 
     try {
       productStmt.setString(1, excelProduct.productName());
-      productStmt.setInt(2, productTypeId);
-      productStmt.setInt(3, voivodeshipId);
+      productStmt.setLong(2, productTypeId);
+      productStmt.setLong(3, voivodeshipId);
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
       String formattedDateOfEntry = excelProduct.dateOfEntry().format(formatter);
       productStmt.setString(4, formattedDateOfEntry);
@@ -61,7 +61,7 @@ class DbInserter {
     }
   }
 
-  private int insertProductType(Map<String, Integer> productTypeMap, ExcelProduct excelProduct) {
+  private long insertProductType(Map<String, Long> productTypeMap, ExcelProduct excelProduct) {
 
     return productTypeMap.computeIfAbsent(
         excelProduct.productType(),
@@ -72,7 +72,7 @@ class DbInserter {
             ResultSet generatedKeys = productTypeStmt.getGeneratedKeys();
 
             if (generatedKeys.next()) {
-              return generatedKeys.getInt(1);
+              return generatedKeys.getLong(1);
             } else {
               throw new RuntimeException(
                   "Data of a product type "

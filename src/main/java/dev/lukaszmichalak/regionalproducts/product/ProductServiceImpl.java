@@ -2,6 +2,8 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.product.exception.ProductNotFoundException;
+
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ class ProductServiceImpl implements ProductService {
   private final ProductMapper productMapper;
 
   @Override
-  public ProductDto getProductById(Integer id) {
+  public ProductDto getProductById(Long id) {
     return productRepository
         .findById(id)
         .map(productMapper::toDto)
@@ -35,19 +37,26 @@ class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public List<ProductDto> getProductsOfVoivodeship(Integer voivodeshipId) {
+  public List<ProductDto> getProductsOfVoivodeship(Long voivodeshipId) {
     return productRepository.findByVoivodeshipId(voivodeshipId).stream()
         .map(productMapper::toDto)
         .toList();
   }
 
   @Override
-  public long countProductsOfVoivodeship(Integer voivodeshipId) {
+  public long countProductsOfVoivodeship(Long voivodeshipId) {
     return productRepository.countByVoivodeshipId(voivodeshipId);
   }
 
   @Override
   public long getProductsCount() {
     return productRepository.count();
+  }
+  
+  @Override
+  public void updateAverageRating(Long productId, BigDecimal averageRating) {
+    Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(productId));
+    product.setAverageRating(averageRating);
+    productRepository.save(product);
   }
 }

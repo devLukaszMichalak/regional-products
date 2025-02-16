@@ -2,6 +2,8 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.product.exception.ProductNotFoundException;
+
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +15,15 @@ class TestProductService implements ProductService {
 
   private final ProductMapper productMapper;
 
-  private static final Map<Integer, Product> products = new HashMap<>();
+  private static final Map<Long, Product> products = new HashMap<>();
 
   static {
-    products.put(1, ProductStub.honey);
-    products.put(2, ProductStub.wine);
+    products.put(1L, ProductStub.honey);
+    products.put(2L, ProductStub.wine);
   }
 
   @Override
-  public ProductDto getProductById(final Integer id) {
+  public ProductDto getProductById(final Long id) {
     return Optional.ofNullable(products.get(id))
         .map(productMapper::toDto)
         .orElseThrow(() -> new ProductNotFoundException(id));
@@ -42,7 +44,7 @@ class TestProductService implements ProductService {
   }
 
   @Override
-  public List<ProductDto> getProductsOfVoivodeship(final Integer voivodeshipId) {
+  public List<ProductDto> getProductsOfVoivodeship(final Long voivodeshipId) {
     return products.values().stream()
         .filter(p -> voivodeshipId.equals(p.getVoivodeshipId()))
         .map(productMapper::toDto)
@@ -50,7 +52,7 @@ class TestProductService implements ProductService {
   }
 
   @Override
-  public long countProductsOfVoivodeship(final Integer voivodeshipId) {
+  public long countProductsOfVoivodeship(final Long voivodeshipId) {
     return products.values().stream()
         .filter(p -> voivodeshipId.equals(p.getVoivodeshipId()))
         .count();
@@ -60,4 +62,11 @@ class TestProductService implements ProductService {
   public long getProductsCount() {
     return products.size();
   }
+  
+  @Override
+  public void updateAverageRating(Long productId, BigDecimal averageRating) {
+    Product product = products.get(productId);
+    product.setAverageRating(averageRating);
+  }
+  
 }

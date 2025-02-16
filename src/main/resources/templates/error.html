@@ -10,7 +10,7 @@
 <main class="h-100 w-100 d-flex flex-column align-items-center px-3 min-content-height">
     <div class="d-flex flex-column w-50 justify-content-center mt-5 text-justify card shadow rounded-4">
         <div class="card-body p-4">
-            <h1 th:text="#{error.header}"></h1>
+            <h1 class="text-start" th:text="#{error.header}"></h1>
             <p th:text="#{error.message}"></p>
             <a th:href="@{/{lang}/voivodeships(lang=${lang})}" class="btn btn-outline-dark rounded-4" th:text="#{error.button.label}"></a>
         </div>

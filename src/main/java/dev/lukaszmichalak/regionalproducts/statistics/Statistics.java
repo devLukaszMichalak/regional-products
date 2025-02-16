@@ -17,10 +17,10 @@ class Statistics {
   @Id
   @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Column(name = "voivodeship_id", nullable = false)
-  private Integer voivodeshipId;
+  private Long voivodeshipId;
 
   @Convert(converter = LocalDateConverter.class)
   @Column(name = "date", nullable = false)

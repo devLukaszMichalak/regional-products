@@ -7,7 +7,7 @@ public interface VoivodeshipService {
 
   List<VoivodeshipDto> getVoivodeships();
 
-  VoivodeshipDto getVoivodeshipById(Integer id);
+  VoivodeshipDto getVoivodeshipById(Long id);
 
   VoivodeshipDto getVoivodeshipByCode(String code);
 }

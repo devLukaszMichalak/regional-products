@@ -12,6 +12,6 @@ interface UserRepository extends ListCrudRepository<User, Long> {
   void deleteUserByUsername(String username);
 
   @Modifying
-  @Query("update User u set u.username = ?1, u.password = ?2 where u.id = ?3")
+  @Query("UPDATE User u SET u.username = ?1, u.password = ?2 WHERE u.id = ?3")
   void updateUsernameAndPasswordById(String username, String password, Long id);
 }

@@ -1,14 +1,15 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.common.LocalDateConverter;
+import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Getter(AccessLevel.PACKAGE)
 @Entity
@@ -20,7 +21,7 @@ class Product {
   @Id
   @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Column(name = "name", nullable = false)
   private String name;
@@ -30,14 +31,19 @@ class Product {
   private ProductType productType;
 
   @Column(name = "voivodeship_id", nullable = false)
-  private Integer voivodeshipId;
+  private Long voivodeshipId;
 
   @Convert(converter = LocalDateConverter.class)
   @Column(name = "date_of_entry", nullable = false)
   private LocalDate dateOfEntry;
-
+  
+  @Convert(converter = LocalDateTimeConverter.class)
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
+  
+  @Setter
+  @Column(name = "average_rating", nullable = false)
+  private BigDecimal averageRating;
 
   @Override
   public boolean equals(Object o) {

@@ -2,7 +2,7 @@ package dev.lukaszmichalak.regionalproducts.voivodeship.exception;
 
 public class VoivodeshipNotFoundException extends RuntimeException {
 
-  public VoivodeshipNotFoundException(Integer id) {
+  public VoivodeshipNotFoundException(Long id) {
     super("Nie znaleziono produktu o id: " + id);
   }
 

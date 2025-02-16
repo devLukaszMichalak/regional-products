@@ -21,7 +21,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
   private final VoivodeshipRepository voivodeshipRepository;
   private final VoivodeshipMapper voivodeshipMapper;
 
-  private final Map<Integer, VoivodeshipDto> cache = new ConcurrentHashMap<>();
+  private final Map<Long, VoivodeshipDto> cache = new ConcurrentHashMap<>();
 
   @PostConstruct
   void init() {
@@ -45,7 +45,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
   }
 
   @Override
-  public VoivodeshipDto getVoivodeshipById(Integer id) {
+  public VoivodeshipDto getVoivodeshipById(Long id) {
     return cache.computeIfAbsent(
         id,
         key ->

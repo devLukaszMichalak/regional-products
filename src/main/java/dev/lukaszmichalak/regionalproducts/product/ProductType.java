@@ -1,5 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
+import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,11 +19,12 @@ class ProductType {
   @Id
   @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Column(name = "name", nullable = false)
   private String name;
 
+  @Convert(converter = LocalDateTimeConverter.class)
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
 

@@ -9,10 +9,10 @@ import java.util.Optional;
 
 class TestVoivodeshipService implements VoivodeshipService {
 
-  private static final Map<Integer, VoivodeshipDto> voivodeships = new HashMap<>();
+  private static final Map<Long, VoivodeshipDto> voivodeships = new HashMap<>();
 
   static {
-    voivodeships.put(1, VoivodeshipStub.ds());
+    voivodeships.put(1L, VoivodeshipStub.ds());
   }
 
   @Override
@@ -21,7 +21,7 @@ class TestVoivodeshipService implements VoivodeshipService {
   }
 
   @Override
-  public VoivodeshipDto getVoivodeshipById(Integer id) {
+  public VoivodeshipDto getVoivodeshipById(Long id) {
     return Optional.ofNullable(voivodeships.get(id))
         .orElseThrow(() -> new VoivodeshipNotFoundException(id));
   }

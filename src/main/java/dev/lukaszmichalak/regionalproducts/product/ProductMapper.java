@@ -11,6 +11,10 @@ class ProductMapper {
   ProductDto toDto(Product product) {
 
     return new ProductDto(
-        product.getName(), product.getProductType().getName(), product.getDateOfEntry());
+        product.getId(),
+        product.getName(),
+        product.getProductType().getName(),
+        product.getDateOfEntry(),
+        product.getAverageRating().doubleValue());
   }
 }

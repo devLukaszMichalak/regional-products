@@ -1,5 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.voivodeship;
 
+import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,7 +19,7 @@ class Voivodeship {
   @Id
   @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Column(name = "name", nullable = false)
   private String name;
@@ -34,7 +35,8 @@ class Voivodeship {
 
   @Column(name = "coat_of_arms_filename", nullable = false)
   private String coatOfArmsFilename;
-
+  
+  @Convert(converter = LocalDateTimeConverter.class)
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
 

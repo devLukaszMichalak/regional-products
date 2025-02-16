@@ -17,23 +17,23 @@ class DbCacheFactory {
     Statement selectVoivodeshipsStmt = connection.createStatement();
     Statement selectProductTypesStmt = connection.createStatement();
 
-    Map<String, Integer> voivodeshipMap =
+    Map<String, Long> voivodeshipMap =
         loadFromDb(selectVoivodeshipsStmt, SELECT_ALL_VOIVODESHIPS_SQL);
 
-    Map<String, Integer> productTypeMap =
+    Map<String, Long> productTypeMap =
         loadFromDb(selectProductTypesStmt, SELECT_ALL_PRODUCT_TYPES_SQL);
 
     return new DbCache(voivodeshipMap, productTypeMap);
   }
 
-  private static Map<String, Integer> loadFromDb(
+  private static Map<String, Long> loadFromDb(
       Statement selectVoivodeshipsStmt, String selectAllVoivodeshipsSql) throws SQLException {
 
-    Map<String, Integer> voivodeshipMap = new HashMap<>();
+    Map<String, Long> voivodeshipMap = new HashMap<>();
     ResultSet voivodeshipResult = selectVoivodeshipsStmt.executeQuery(selectAllVoivodeshipsSql);
 
     while (voivodeshipResult.next()) {
-      voivodeshipMap.put(voivodeshipResult.getString("name"), voivodeshipResult.getInt("id"));
+      voivodeshipMap.put(voivodeshipResult.getString("name"), voivodeshipResult.getLong("id"));
     }
 
     return voivodeshipMap;
