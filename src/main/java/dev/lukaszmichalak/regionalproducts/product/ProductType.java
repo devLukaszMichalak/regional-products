@@ -2,6 +2,7 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,18 @@ class ProductType {
 
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ProductType productType = (ProductType) o;
+    return Objects.equals(id, productType.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
 }

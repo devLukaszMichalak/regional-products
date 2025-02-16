@@ -2,9 +2,9 @@ package dev.lukaszmichalak.regionalproducts.statistics;
 
 import dev.lukaszmichalak.regionalproducts.common.LocalDateConverter;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDate;
+import java.util.Objects;
+import lombok.*;
 
 @Entity
 @Getter(AccessLevel.PACKAGE)
@@ -28,4 +28,18 @@ class Statistics {
 
   @Column(name = "count", nullable = false)
   private Integer count;
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Statistics statistics = (Statistics) o;
+    return Objects.equals(id, statistics.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
 }

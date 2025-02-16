@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS voivodeship
     CHECK (coat_of_arms_filename LIKE '%.png')
 ) strict;
 
+CREATE UNIQUE INDEX IF NOT EXISTS idx_voivodeship_code ON voivodeship (code);
+
 CREATE TABLE IF NOT EXISTS product_type
 (
     id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -56,3 +58,12 @@ CREATE TABLE IF NOT EXISTS statistics
     CHECK (count >= 0),
     CHECK (date >= '1900-01-01')
 ) strict;
+
+CREATE TABLE IF NOT EXISTS users
+(
+    id       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    username TEXT    NOT NULL UNIQUE,
+    password TEXT    NOT NULL
+) strict;
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users (username);

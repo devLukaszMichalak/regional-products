@@ -13,7 +13,7 @@
             <div class="card-body">
                 <h2 th:text="#{login.title}" class="text-center mb-4"></h2>
 
-                <form th:action="@{/{lang}/login(lang=${lang})}" method="post">
+                <form th:action="@{/login(lang=${lang})}" method="post">
                     <div class="mb-3">
                         <label th:text="#{login.username}" for="username" class="form-label"></label>
                         <input type="text" id="username" name="username"
@@ -27,7 +27,7 @@
                                required/>
                     </div>
 
-                    <button th:text="#{login.title}" type="submit" class="btn btn-secondary w-100"></button>
+                    <button th:text="#{login.submit}" type="submit" class="btn btn-secondary w-100"></button>
                 </form>
 
                 <div class="text-center mt-3">

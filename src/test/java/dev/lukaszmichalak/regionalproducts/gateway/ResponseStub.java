@@ -37,7 +37,14 @@ class ResponseStub {
             <a class="navbar-brand mb-0 h1 title-font"
                href="/en/voivodeships">Regional Products</a>
 
-            <div class="border-start border-secondary d-flex flex-column ps-3">
+            <div class="d-flex align-items-center ms-auto">
+
+                <a href="/en/login" class="btn btn-secondary ms-3">Log in</a>
+
+               \s
+            </div>
+
+            <div class="border-start border-secondary d-flex flex-column ps-3 ms-3">
 
                 <a class="navbar-text p-0 transition-all fw-bolder link-dark"
                    href="/en/voivodeships">en
@@ -46,10 +53,9 @@ class ResponseStub {
                 <a class="navbar-text p-0 transition-all link-secondary"
                    href="/pl/voivodeships">pl
                 </a>
-
             </div>
-        </div>
 
+        </div>
     </nav>
 </header>
 

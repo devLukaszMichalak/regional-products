@@ -2,9 +2,9 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface ProductRepository extends JpaRepository<Product, Integer> {
+interface ProductRepository extends ListCrudRepository<Product, Integer> {
 
   Optional<Product> findByName(String name);
 

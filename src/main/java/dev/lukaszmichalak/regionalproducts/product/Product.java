@@ -4,6 +4,7 @@ import dev.lukaszmichalak.regionalproducts.common.LocalDateConverter;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,4 +38,18 @@ class Product {
 
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Product product = (Product) o;
+    return Objects.equals(id, product.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
 }

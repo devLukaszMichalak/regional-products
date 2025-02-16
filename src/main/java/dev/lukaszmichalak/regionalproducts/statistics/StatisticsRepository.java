@@ -1,11 +1,10 @@
 package dev.lukaszmichalak.regionalproducts.statistics;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDate;
 import java.util.Optional;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface StatisticsRepository extends JpaRepository<Statistics, Integer> {
-    
-    Optional<Statistics> findByVoivodeshipIdAndDate(Integer voivodeshipId, LocalDate date);
+interface StatisticsRepository extends ListCrudRepository<Statistics, Integer> {
+
+  Optional<Statistics> findByVoivodeshipIdAndDate(Integer voivodeshipId, LocalDate date);
 }

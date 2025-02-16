@@ -18,11 +18,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+@WithMockUser
 @WebMvcTest(VoivodeshipsController.class)
-@Import(VoivodeshipsControllerBeanConfigTest.TestVoivodeshipControllerConfig.class)
-class VoivodeshipsControllerBeanConfigTest {
+@Import(VoivodeshipsControllerBeanConfigIT.TestVoivodeshipControllerConfig.class)
+class VoivodeshipsControllerBeanConfigIT {
 
   @Autowired private MockMvc mockMvc;
 
@@ -93,10 +95,8 @@ class VoivodeshipsControllerBeanConfigTest {
         .andExpect(status().isOk())
         .andExpect(model().attribute("totalCount", CountStub.totalCount))
         .andExpect(
-            xpath(
-                    "//tr[td[contains(text(), 'suma')]]/td[contains(text(), '%s')]"
-                        .formatted(CountStub.totalCount))
-                .string(String.valueOf(CountStub.totalCount)));
+            xpath("//td[@class='py-1 fw-bolder border-start']")
+                .string(Long.toString(CountStub.totalCount)));
   }
 
   @Test
@@ -106,10 +106,8 @@ class VoivodeshipsControllerBeanConfigTest {
         .andExpect(status().isOk())
         .andExpect(model().attribute("totalCount", CountStub.totalCount))
         .andExpect(
-            xpath(
-                    "//tr[td[contains(text(), 'combined')]]/td[contains(text(), '%s')]"
-                        .formatted(CountStub.totalCount))
-                .string(String.valueOf(CountStub.totalCount)));
+            xpath("//td[@class='py-1 fw-bolder border-start']")
+                .string(Long.toString(CountStub.totalCount)));
   }
 
   @Test
@@ -154,17 +152,17 @@ class VoivodeshipsControllerBeanConfigTest {
   static class TestVoivodeshipControllerConfig {
 
     @Bean("productService")
-    public ProductService productService() {
+    ProductService productService() {
       return TestProductConfig.productService();
     }
 
     @Bean("voivodeshipService")
-    public VoivodeshipService voivodeshipService() {
+    VoivodeshipService voivodeshipService() {
       return TestVoivodeshipConfig.voivodeshipService();
     }
 
     @Bean("countService")
-    public CountService countService() {
+    CountService countService() {
       return TestCountConfig.countService();
     }
   }

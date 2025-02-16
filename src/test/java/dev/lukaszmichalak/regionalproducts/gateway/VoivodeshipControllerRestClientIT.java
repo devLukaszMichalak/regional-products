@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClient;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("dev")
-class VoivodeshipControllerRestClientTest {
+class VoivodeshipControllerRestClientIT {
 
   @LocalServerPort private int port;
 
@@ -89,7 +89,7 @@ class VoivodeshipControllerRestClientTest {
 
     assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     assertThat(response.getBody()).isNotNull();
-    assertThat(response.getBody()).contains("Error 404");
+    assertThat(response.getBody()).contains("There was an error...");
     assertThat(response.getBody()).contains(">Go to Homepage</a>");
   }
 

@@ -1,9 +1,9 @@
 package dev.lukaszmichalak.regionalproducts.voivodeship;
 
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface VoivodeshipRepository extends JpaRepository<Voivodeship, Integer> {
+interface VoivodeshipRepository extends ListCrudRepository<Voivodeship, Integer> {
 
   Optional<Voivodeship> findByCodeIgnoreCase(String code);
 }

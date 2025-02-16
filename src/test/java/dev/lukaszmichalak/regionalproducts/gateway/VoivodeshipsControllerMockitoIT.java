@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import dev.lukaszmichalak.regionalproducts.count.CountService;
 import dev.lukaszmichalak.regionalproducts.count.CountStub;
+import dev.lukaszmichalak.regionalproducts.locale.LocaleResolverTestConfig;
 import dev.lukaszmichalak.regionalproducts.product.ProductService;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipStub;
@@ -17,12 +18,16 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+@WithMockUser
 @WebMvcTest(VoivodeshipsController.class)
+@Import(LocaleResolverTestConfig.class)
 @Execution(ExecutionMode.SAME_THREAD)
-class VoivodeshipsControllerMockitoTest {
+class VoivodeshipsControllerMockitoIT {
 
   @Autowired private MockMvc mockMvc;
 
@@ -122,10 +127,8 @@ class VoivodeshipsControllerMockitoTest {
         .andExpect(status().isOk())
         .andExpect(model().attribute("totalCount", CountStub.totalCount))
         .andExpect(
-            xpath(
-                    "//tr[td[contains(text(), 'suma')]]/td[contains(text(), '%s')]"
-                        .formatted(CountStub.totalCount))
-                .string(String.valueOf(CountStub.totalCount)));
+            xpath("//td[@class='py-1 fw-bolder border-start']")
+                .string(Long.toString(CountStub.totalCount)));
   }
 
   @Test
@@ -139,10 +142,8 @@ class VoivodeshipsControllerMockitoTest {
         .andExpect(status().isOk())
         .andExpect(model().attribute("totalCount", CountStub.totalCount))
         .andExpect(
-            xpath(
-                    "//tr[td[contains(text(), 'combined')]]/td[contains(text(), '%s')]"
-                        .formatted(CountStub.totalCount))
-                .string(String.valueOf(CountStub.totalCount)));
+            xpath("//td[@class='py-1 fw-bolder border-start']")
+                .string(Long.toString(CountStub.totalCount)));
   }
 
   @Test
