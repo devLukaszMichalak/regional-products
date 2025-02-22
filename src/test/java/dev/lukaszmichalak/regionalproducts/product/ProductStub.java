@@ -13,7 +13,7 @@ public class ProductStub {
           1L,
           "Miód wrzosowy z Borów Dolnośląskich",
           new ProductType(1L, "Miody", LocalDateTime.of(2024, 1, 1, 12, 0)),
-          VoivodeshipStub.ds().id(),
+          VoivodeshipStub.dsDto().id(),
           LocalDate.of(2024, 1, 1),
           LocalDateTime.of(2024, 1, 1, 12, 0),
           BigDecimal.valueOf(2));
@@ -24,7 +24,7 @@ public class ProductStub {
           "Wino śląskie",
           new ProductType(
               2L, "Napoje (alkoholowe i bezalkoholowe)", LocalDateTime.of(2024, 1, 1, 12, 0)),
-          VoivodeshipStub.ds().id(),
+          VoivodeshipStub.dsDto().id(),
           LocalDate.of(2024, 1, 1),
           LocalDateTime.of(2024, 1, 1, 12, 0),
           BigDecimal.valueOf(4));

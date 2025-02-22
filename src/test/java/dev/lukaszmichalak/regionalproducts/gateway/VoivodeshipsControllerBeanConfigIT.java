@@ -31,7 +31,7 @@ class VoivodeshipsControllerBeanConfigIT {
   @Test
   void testGetVoivodeships() throws Exception {
 
-    var voivodeshipDtosMatcher = IsIterableContainingInOrder.contains(VoivodeshipStub.ds());
+    var voivodeshipDtosMatcher = IsIterableContainingInOrder.contains(VoivodeshipStub.dsDto());
     var countDtosMatcher = IsIterableContainingInOrder.contains(CountStub.ds());
 
     mockMvc
@@ -70,7 +70,7 @@ class VoivodeshipsControllerBeanConfigIT {
         .andExpect(
             xpath(
                     "//a[contains(@href, '/pl/voivodeships/%s')]"
-                        .formatted(VoivodeshipStub.ds().code()))
+                        .formatted(VoivodeshipStub.dsDto().code()))
                 .exists())
         .andExpect(xpath("//a[contains(@href, '/pl/poland')]").exists());
   }
@@ -83,7 +83,7 @@ class VoivodeshipsControllerBeanConfigIT {
         .andExpect(
             xpath(
                     "//a[contains(@href, '/en/voivodeships/%s')]"
-                        .formatted(VoivodeshipStub.ds().code()))
+                        .formatted(VoivodeshipStub.dsDto().code()))
                 .exists())
         .andExpect(xpath("//a[contains(@href, '/en/poland')]").exists());
   }

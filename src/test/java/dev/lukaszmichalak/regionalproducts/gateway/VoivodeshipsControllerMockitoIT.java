@@ -39,11 +39,11 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testGetVoivodeships() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
-    var voivodeshipDtosMatcher = IsIterableContainingInOrder.contains(VoivodeshipStub.ds());
+    var voivodeshipDtosMatcher = IsIterableContainingInOrder.contains(VoivodeshipStub.dsDto());
     var countDtosMatcher = IsIterableContainingInOrder.contains(CountStub.ds());
 
     mockMvc
@@ -58,7 +58,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testLocalizedPlContent() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -71,7 +71,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testLocalizedEnContent() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -84,7 +84,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testVoivodeshipsLinksPl() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -94,14 +94,14 @@ class VoivodeshipsControllerMockitoIT {
         .andExpect(
             xpath(
                     "//a[contains(@href, '/pl/voivodeships/%s')]"
-                        .formatted(VoivodeshipStub.ds().code()))
+                        .formatted(VoivodeshipStub.dsDto().code()))
                 .exists())
         .andExpect(xpath("//a[contains(@href, '/pl/poland')]").exists());
   }
 
   @Test
   void testVoivodeshipsLinksEn() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -111,14 +111,14 @@ class VoivodeshipsControllerMockitoIT {
         .andExpect(
             xpath(
                     "//a[contains(@href, '/en/voivodeships/%s')]"
-                        .formatted(VoivodeshipStub.ds().code()))
+                        .formatted(VoivodeshipStub.dsDto().code()))
                 .exists())
         .andExpect(xpath("//a[contains(@href, '/en/poland')]").exists());
   }
 
   @Test
   void testCountsConsistencyPl() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -133,7 +133,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testCountsConsistencyEn() throws Exception {
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -148,7 +148,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testGetVoivodeshipByCode() throws Exception {
-    doReturn(VoivodeshipStub.ds()).when(voivodeshipService).getVoivodeshipByCode("DS");
+    doReturn(VoivodeshipStub.dsDto()).when(voivodeshipService).getVoivodeshipByCode("DS");
 
     mockMvc
         .perform(get("/en/voivodeships/DS"))
@@ -160,7 +160,7 @@ class VoivodeshipsControllerMockitoIT {
 
   @Test
   void testGetVoivodeshipByCodeLower() throws Exception {
-    doReturn(VoivodeshipStub.ds()).when(voivodeshipService).getVoivodeshipByCode("ds");
+    doReturn(VoivodeshipStub.dsDto()).when(voivodeshipService).getVoivodeshipByCode("ds");
 
     mockMvc
         .perform(get("/en/voivodeships/ds"))

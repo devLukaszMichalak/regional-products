@@ -19,7 +19,6 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
   private static int VOIVODESHIP_COUNT = 16;
 
   private final VoivodeshipRepository voivodeshipRepository;
-  private final VoivodeshipMapper voivodeshipMapper;
 
   private final Map<Long, VoivodeshipDto> cache = new ConcurrentHashMap<>();
 
@@ -37,7 +36,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
 
     List<VoivodeshipDto> list = new ArrayList<>();
     for (Voivodeship voivodeship : voivodeshipRepository.findAll()) {
-      var voivodeshipDto = voivodeshipMapper.toDto(voivodeship);
+      var voivodeshipDto = VoivodeshipMapper.toDto(voivodeship);
       cache.putIfAbsent(voivodeship.getId(), voivodeshipDto);
       list.add(voivodeshipDto);
     }
@@ -51,7 +50,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
         key ->
             voivodeshipRepository
                 .findById(key)
-                .map(voivodeshipMapper::toDto)
+                .map(VoivodeshipMapper::toDto)
                 .orElseThrow(() -> new VoivodeshipNotFoundException(key)));
   }
 
@@ -64,7 +63,7 @@ class VoivodeshipServiceImpl implements VoivodeshipService {
             () ->
                 voivodeshipRepository
                     .findByCodeIgnoreCase(code)
-                    .map(voivodeshipMapper::toDto)
+                    .map(VoivodeshipMapper::toDto)
                     .map(
                         v -> {
                           cache.put(v.id(), v);

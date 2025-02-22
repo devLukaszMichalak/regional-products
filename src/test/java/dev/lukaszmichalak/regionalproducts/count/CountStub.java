@@ -9,6 +9,6 @@ public class CountStub {
   public static long totalCount = ProductStub.count;
 
   public static CountDto ds() {
-    return new CountDto(VoivodeshipStub.ds().name(), totalCount);
+    return new CountDto(VoivodeshipStub.dsDto().name(), totalCount);
   }
 }

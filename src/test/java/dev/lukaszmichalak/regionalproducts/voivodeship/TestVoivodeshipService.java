@@ -12,7 +12,7 @@ class TestVoivodeshipService implements VoivodeshipService {
   private static final Map<Long, VoivodeshipDto> voivodeships = new HashMap<>();
 
   static {
-    voivodeships.put(1L, VoivodeshipStub.ds());
+    voivodeships.put(1L, VoivodeshipStub.dsDto());
   }
 
   @Override

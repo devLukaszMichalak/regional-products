@@ -35,7 +35,7 @@ class StatisticsServiceTest {
   @Test
   void shouldIncrementExistingStatistics() {
     // Given
-    VoivodeshipDto voivodeshipDto = VoivodeshipStub.ds();
+    VoivodeshipDto voivodeshipDto = VoivodeshipStub.dsDto();
     LocalDate now = LocalDate.now(clock);
 
     Statistics existingStatistics = new Statistics(1L, voivodeshipDto.id(), now, 5);
@@ -58,7 +58,7 @@ class StatisticsServiceTest {
   @Test
   void shouldCreateNewStatisticsIfNotExist() {
     // Given
-    VoivodeshipDto voivodeshipDto = VoivodeshipStub.ds();
+    VoivodeshipDto voivodeshipDto = VoivodeshipStub.dsDto();
     LocalDate now = LocalDate.now(clock);
 
     doReturn(voivodeshipDto).when(voivodeshipService).getVoivodeshipByCode(voivodeshipDto.code());

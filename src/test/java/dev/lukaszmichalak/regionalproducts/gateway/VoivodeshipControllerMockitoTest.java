@@ -33,7 +33,7 @@ class VoivodeshipControllerMockitoTest {
   @Test
   void testGetVoivodeships() {
 
-    doReturn(List.of(VoivodeshipStub.ds())).when(voivodeshipService).getVoivodeships();
+    doReturn(List.of(VoivodeshipStub.dsDto())).when(voivodeshipService).getVoivodeships();
     doReturn(List.of(CountStub.ds())).when(countService).getCounts();
     doReturn(CountStub.totalCount).when(countService).getTotalCount();
 
@@ -51,18 +51,18 @@ class VoivodeshipControllerMockitoTest {
   @Test
   void testGetVoivodeship() {
 
-    doReturn(VoivodeshipStub.ds())
+    doReturn(VoivodeshipStub.dsDto())
         .when(voivodeshipService)
-        .getVoivodeshipByCode(VoivodeshipStub.ds().code());
+        .getVoivodeshipByCode(VoivodeshipStub.dsDto().code());
     var products = List.of(ProductStub.honeyDto(), ProductStub.wineDto());
-    doReturn(products).when(productService).getProductsOfVoivodeship(VoivodeshipStub.ds().id());
+    doReturn(products).when(productService).getProductsOfVoivodeship(VoivodeshipStub.dsDto().id());
 
-    String returnValue = voivodeshipsController.getVoivodeship(model, VoivodeshipStub.ds().code());
+    String returnValue = voivodeshipsController.getVoivodeship(model, VoivodeshipStub.dsDto().code());
 
     assertThat(returnValue).isEqualTo("voivodeship");
-    verify(voivodeshipService).getVoivodeshipByCode(VoivodeshipStub.ds().code());
-    verify(productService).getProductsOfVoivodeship(VoivodeshipStub.ds().id());
-    verify(model).addAttribute("voivodeshipCode", VoivodeshipStub.ds().code());
+    verify(voivodeshipService).getVoivodeshipByCode(VoivodeshipStub.dsDto().code());
+    verify(productService).getProductsOfVoivodeship(VoivodeshipStub.dsDto().id());
+    verify(model).addAttribute("voivodeshipCode", VoivodeshipStub.dsDto().code());
     verify(model).addAttribute("products", products);
   }
 
