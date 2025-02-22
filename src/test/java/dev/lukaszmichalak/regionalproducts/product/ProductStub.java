@@ -31,14 +31,16 @@ public class ProductStub {
 
   public static ProductDto wineDto() {
     return new ProductDto(
+        wine.getId(),
         wine.getName(),
         wine.getProductType().getName(),
         wine.getDateOfEntry(),
-        honey.getAverageRating().doubleValue());
+        wine.getAverageRating().doubleValue());
   }
 
   public static ProductDto honeyDto() {
     return new ProductDto(
+        honey.getId(),
         honey.getName(),
         honey.getProductType().getName(),
         honey.getDateOfEntry(),

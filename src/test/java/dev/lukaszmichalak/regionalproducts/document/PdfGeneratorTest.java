@@ -36,6 +36,7 @@ class PdfGeneratorTest {
     byte[] expectedPdf = Files.readAllBytes(expectedPdfPath);
     String expectedPdfString = tika.parseToString(new ByteArrayInputStream(expectedPdf));
 
+    assertThat(pdfString).isNotBlank();
     assertThat(pdfString).isEqualTo(expectedPdfString);
   }
 }

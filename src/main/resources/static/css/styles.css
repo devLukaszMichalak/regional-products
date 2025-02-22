@@ -102,12 +102,3 @@ a {
 .border-none {
     border: none;
 }
-
-.star:hover svg,
-.star:has(~ .star:hover) svg {
-    fill: gold;
-}
-
-.star.selected svg {
-    fill: gold;
-}

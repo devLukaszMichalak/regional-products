@@ -4,5 +4,5 @@ import dev.lukaszmichalak.regionalproducts.gateway.command.PostRatingCommand;
 
 public interface RatingService {
 
-  void addNewRating(PostRatingCommand cmd);
+  void saveUserRating(PostRatingCommand cmd);
 }

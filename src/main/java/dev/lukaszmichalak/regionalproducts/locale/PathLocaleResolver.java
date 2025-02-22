@@ -10,7 +10,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 @Component("localeResolver")
 class PathLocaleResolver implements LocaleResolver {
-  
+
   @NonNull
   @Override
   public Locale resolveLocale(HttpServletRequest request) {
@@ -32,7 +32,8 @@ class PathLocaleResolver implements LocaleResolver {
   }
 
   @Override
-  public void setLocale(@NonNull HttpServletRequest request, HttpServletResponse response, Locale locale) {
+  public void setLocale(
+      @NonNull HttpServletRequest request, HttpServletResponse response, Locale locale) {
     throw new UnsupportedOperationException();
   }
 }

@@ -94,9 +94,11 @@ class DocxGenerator implements DocumentGenerator {
     XWPFTableRow headerRow = table.getRow(0);
     headerRow.createCell();
     headerRow.createCell();
+    headerRow.createCell();
     headerRow.getCell(0).setText(isPL(lang) ? "Nazwa" : "Name");
     headerRow.getCell(1).setText(isPL(lang) ? "Typ" : "Type");
     headerRow.getCell(2).setText(isPL(lang) ? "Data wprowadzenia" : "Date of entry");
+    headerRow.getCell(3).setText(isPL(lang) ? "Średnia ocena" : "Average rating");
   }
 
   private void addProductRow(XWPFTable table, ProductDto product) {
@@ -104,6 +106,7 @@ class DocxGenerator implements DocumentGenerator {
     row.getCell(0).setText(product.name());
     row.getCell(1).setText(product.productTypeName());
     row.getCell(2).setText(product.dateOfEntry().toString());
+    row.getCell(3).setText(product.averageRating().toString());
   }
 
   private boolean isPL(String lang) {

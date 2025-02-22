@@ -2,7 +2,6 @@ package dev.lukaszmichalak.regionalproducts.rating;
 
 import dev.lukaszmichalak.regionalproducts.gateway.command.PostRatingCommand;
 import dev.lukaszmichalak.regionalproducts.product.ProductService;
-import dev.lukaszmichalak.regionalproducts.rating.dto.RatingDto;
 import dev.lukaszmichalak.regionalproducts.security.user.UserService;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
@@ -25,35 +24,46 @@ class RatingServiceImpl implements RatingService {
 
   @Transactional
   @Override
-  public void addNewRating(PostRatingCommand cmd) {
+  public void saveUserRating(PostRatingCommand cmd) {
     List<Rating> oldRatings = ratingRepository.findByProductId(cmd.productId());
     Long currentUserId = getCurrentUserId();
 
-    if (oldRatings.stream().anyMatch(r -> r.getUserId().equals(currentUserId))) {
-      log.debug(
-          "Rating already exists for product {}. The old rating will be removed.", cmd.productId());
-
-      Long oldRatingSumWithoutUserRating =
-          oldRatings.stream()
-              .filter(r -> !r.getUserId().equals(currentUserId))
-              .mapToLong(Rating::getRating)
-              .sum();
-
-      BigDecimal averageRating =
-          getAverageRating(oldRatingSumWithoutUserRating + cmd.rating(), oldRatings.size());
-      productService.updateAverageRating(cmd.productId(), averageRating);
-
-      ratingRepository.update // todo update old rating, add creation time for ratings
-
+    if (hasUserRating(oldRatings, currentUserId)) {
+      updateExistingRating(cmd, oldRatings, currentUserId);
     } else {
-      Long oldRatingSum = oldRatings.stream().mapToLong(Rating::getRating).sum();
-
-      BigDecimal averageRating =
-          getAverageRating(oldRatingSum + cmd.rating(), oldRatings.size() + 1);
-      productService.updateAverageRating(cmd.productId(), averageRating);
-
-      ratingRepository.save(new Rating(currentUserId, cmd.productId(), cmd.rating()));
+      addNewRating(cmd, oldRatings, currentUserId);
     }
+  }
+
+  private boolean hasUserRating(List<Rating> oldRatings, Long currentUserId) {
+    return oldRatings.stream().anyMatch(r -> r.getUserId().equals(currentUserId));
+  }
+
+  private void updateExistingRating(
+      PostRatingCommand cmd, List<Rating> oldRatings, Long currentUserId) {
+    log.debug(
+        "Rating already exists for product {}. The old rating will be removed.", cmd.productId());
+
+    Long ratingSum =
+        oldRatings.stream()
+                .filter(r -> !r.getUserId().equals(currentUserId))
+                .mapToLong(Rating::getRating)
+                .sum()
+            + cmd.rating();
+
+    BigDecimal averageRating = getAverageRating(ratingSum, oldRatings.size());
+
+    productService.updateAverageRating(cmd.productId(), averageRating);
+    ratingRepository.updateRatingByUserIdAndProductId(cmd.rating(), currentUserId, cmd.productId());
+  }
+
+  private void addNewRating(PostRatingCommand cmd, List<Rating> oldRatings, Long currentUserId) {
+    Long ratingSum = oldRatings.stream().mapToLong(Rating::getRating).sum() + cmd.rating();
+
+    BigDecimal averageRating = getAverageRating(ratingSum, oldRatings.size() + 1);
+
+    productService.updateAverageRating(cmd.productId(), averageRating);
+    ratingRepository.save(new Rating(currentUserId, cmd.productId(), cmd.rating()));
   }
 
   private Long getCurrentUserId() {

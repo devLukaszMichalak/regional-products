@@ -3,6 +3,7 @@ package dev.lukaszmichalak.regionalproducts.security.filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -14,12 +15,13 @@ class SecurityFilterConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    return http.authorizeHttpRequests(
+    return http.csrf(Customizer.withDefaults())
+        .authorizeHttpRequests(
             authorize ->
                 authorize
                     .requestMatchers("/register", "/*/register", "/login", "/*/login")
                     .anonymous()
-                    .requestMatchers(HttpMethod.POST, "/rank")
+                    .requestMatchers(HttpMethod.POST, "/rating")
                     .authenticated()
                     .anyRequest()
                     .permitAll())
@@ -37,6 +39,6 @@ class SecurityFilterConfig {
         .logout(
             logout ->
                 logout.logoutUrl("/logout").logoutSuccessHandler(new LangLogoutSuccessHandler()))
-            .build();
+        .build();
   }
 }

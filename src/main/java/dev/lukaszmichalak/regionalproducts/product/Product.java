@@ -38,7 +38,7 @@ class Product {
   private LocalDate dateOfEntry;
   
   @Convert(converter = LocalDateTimeConverter.class)
-  @Column(name = "creation_date", nullable = false)
+  @Column(name = "creation_date", nullable = false, insertable = false, updatable = false)
   private LocalDateTime creationDate;
   
   @Setter

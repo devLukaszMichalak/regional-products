@@ -97,7 +97,7 @@ class PdfGenerator implements DocumentGenerator {
     contentStream.setFont(pdfGenerationContext.getFonts().fontRegular(), descriptionFontSize);
     contentStream.beginText();
 
-    float maxWidth = 175 + 175 + 80;
+    float maxWidth = 170 + 170 + 75 + 75;
     float descriptionX = (PDRectangle.A4.getWidth() - maxWidth) / 2;
     contentStream.newLineAtOffset(descriptionX, pdfGenerationContext.getLastElementY());
 
@@ -144,7 +144,7 @@ class PdfGenerator implements DocumentGenerator {
         Table.builder()
             .borderWidth(1)
             .borderColor(Color.BLACK)
-            .addColumnsOfWidth(175, 175, 80)
+            .addColumnsOfWidth(170, 170, 75, 75)
             .horizontalAlignment(LEFT)
             .fontSize(11)
             .font(pdfGenerationContext.getFonts().fontRegular())
@@ -160,7 +160,7 @@ class PdfGenerator implements DocumentGenerator {
         TableDrawer.builder()
             .contentStream(pdfGenerationContext.getContentStream())
             .table(tableBuilder.build())
-            .startX((PDRectangle.A4.getWidth() - (175 + 175 + 80)) / 2)
+            .startX((PDRectangle.A4.getWidth() - (170 + 170 + 75 + 75)) / 2)
             .startY(PDRectangle.A4.getWidth())
             .endY(50)
             .build();
@@ -188,6 +188,10 @@ class PdfGenerator implements DocumentGenerator {
                 TextCell.builder()
                     .text(pdfGenerationContext.getData().langColumnTitleDateOfEntry())
                     .build())
+            .add(
+                TextCell.builder()
+                    .text(pdfGenerationContext.getData().langColumnAverageRating())
+                    .build())
             .textColor(Color.BLACK)
             .font(pdfGenerationContext.getFonts().fontRegular())
             .build());
@@ -199,6 +203,7 @@ class PdfGenerator implements DocumentGenerator {
             .add(TextCell.builder().text(product.name()).build())
             .add(TextCell.builder().text(product.productTypeName()).build())
             .add(TextCell.builder().text(product.dateOfEntry().toString()).build())
+            .add(TextCell.builder().text(product.averageRating().toString()).build())
             .build());
   }
 }

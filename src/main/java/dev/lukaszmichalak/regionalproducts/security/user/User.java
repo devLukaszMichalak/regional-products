@@ -1,6 +1,8 @@
 package dev.lukaszmichalak.regionalproducts.security.user;
 
+import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,10 @@ class User implements UserDetails {
   @Setter(AccessLevel.PACKAGE)
   @Column(name = "password", nullable = false)
   private String password;
+
+  @Convert(converter = LocalDateTimeConverter.class)
+  @Column(name = "creation_date", nullable = false, insertable = false, updatable = false)
+  private LocalDateTime creationDate;
 
   User(String username, String password) {
     this.username = username;

@@ -25,4 +25,8 @@ record PdfData(
   String langColumnTitleDateOfEntry() {
     return isPl ? "Data wprowadzenia" : "Date of entry";
   }
+
+  String langColumnAverageRating() {
+    return isPl ? "Średnia ocena" : "Average rating";
+  }
 }

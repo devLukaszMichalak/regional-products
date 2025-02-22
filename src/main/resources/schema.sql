@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS product
     voivodeship_id  INTEGER NOT NULL,
     date_of_entry   TEXT    NOT NULL,
     creation_date   TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    average_rating   REAL    NOT NULL DEFAULT 0.0,
+    average_rating  REAL    NOT NULL DEFAULT 0.0,
     CHECK (TRIM(name) != ''),
     FOREIGN KEY (product_type_id) REFERENCES product_type (id),
     FOREIGN KEY (voivodeship_id) REFERENCES voivodeship (id),
@@ -64,21 +64,26 @@ CREATE TABLE IF NOT EXISTS statistics
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    username TEXT    NOT NULL UNIQUE,
-    password TEXT    NOT NULL
+    id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    username      TEXT    NOT NULL UNIQUE,
+    password      TEXT    NOT NULL,
+    creation_date TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (TRIM(creation_date) != '')
 ) strict;
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users (username);
 
 CREATE TABLE IF NOT EXISTS ratings
 (
-    id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    user_id    TEXT    NOT NULL UNIQUE,
-    product_id TEXT    NOT NULL UNIQUE,
-    rating     INTEGER NOT NULL DEFAULT 0,
+    id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id       INTEGER NOT NULL,
+    product_id    INTEGER NOT NULL,
+    rating        INTEGER NOT NULL DEFAULT 0,
+    creation_date TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (product_id) REFERENCES product (id),
+    UNIQUE (user_id, product_id),
     CHECK (ratings.rating >= 1 or ratings.rating == 0),
-    CHECK (ratings.rating <= 5)
+    CHECK (ratings.rating <= 5),
+    CHECK (TRIM(creation_date) != '')
 ) strict;
