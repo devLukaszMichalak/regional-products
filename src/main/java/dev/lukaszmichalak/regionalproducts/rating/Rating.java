@@ -1,12 +1,11 @@
 package dev.lukaszmichalak.regionalproducts.rating;
 
-import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
+import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 
 @Entity

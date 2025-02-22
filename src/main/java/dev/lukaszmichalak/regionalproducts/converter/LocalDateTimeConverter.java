@@ -1,4 +1,4 @@
-package dev.lukaszmichalak.regionalproducts.common;
+package dev.lukaszmichalak.regionalproducts.converter;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

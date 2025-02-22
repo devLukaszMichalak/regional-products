@@ -1,6 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.security.user;
 
-import dev.lukaszmichalak.regionalproducts.common.LocalDateTimeConverter;
+import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
