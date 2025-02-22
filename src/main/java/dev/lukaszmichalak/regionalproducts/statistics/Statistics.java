@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 @Entity
 @Getter(AccessLevel.PACKAGE)
@@ -28,18 +29,20 @@ class Statistics {
 
   @Column(name = "count", nullable = false)
   private Integer count;
-
+  
   @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Statistics statistics = (Statistics) o;
-    return Objects.equals(id, statistics.id);
+  public final boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null) return false;
+    Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+    Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+    if (thisEffectiveClass != oEffectiveClass) return false;
+    Statistics that = (Statistics) o;
+    return getId() != null && Objects.equals(getId(), that.getId());
   }
-
+  
   @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
+  public final int hashCode() {
+    return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
   }
 }

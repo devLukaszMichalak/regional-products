@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 @Getter(AccessLevel.PACKAGE)
 @Entity
@@ -44,18 +45,20 @@ class Product {
   @Setter
   @Column(name = "average_rating", nullable = false)
   private BigDecimal averageRating;
-
+  
   @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
+  public final boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null) return false;
+    Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+    Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+    if (thisEffectiveClass != oEffectiveClass) return false;
     Product product = (Product) o;
-    return Objects.equals(id, product.id);
+    return getId() != null && Objects.equals(getId(), product.getId());
   }
-
+  
   @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
+  public final int hashCode() {
+    return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
   }
 }
