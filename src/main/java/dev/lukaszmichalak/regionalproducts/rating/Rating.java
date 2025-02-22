@@ -4,7 +4,6 @@ import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 

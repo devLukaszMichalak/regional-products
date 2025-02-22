@@ -30,7 +30,7 @@ class VoivodeshipServiceImplTest {
 
   @Test
   void shouldReturnAllVoivodeships() {
-    when(voivodeshipRepository.findAll()).thenReturn(List.of(VoivodeshipStub.ds()));
+    when(voivodeshipRepository.findAll()).thenReturn(List.of(VoivodeshipStub.ds));
 
     List<VoivodeshipDto> result = voivodeshipService.getVoivodeships();
 
@@ -41,7 +41,7 @@ class VoivodeshipServiceImplTest {
 
   @Test
   void shouldReturnAllVoivodeshipsFromCache() {
-    when(voivodeshipRepository.findAll()).thenReturn(List.of(VoivodeshipStub.ds()));
+    when(voivodeshipRepository.findAll()).thenReturn(List.of(VoivodeshipStub.ds));
 
     List<VoivodeshipDto> results1 = voivodeshipService.getVoivodeships();
     List<VoivodeshipDto> results2 = voivodeshipService.getVoivodeships();
@@ -58,7 +58,7 @@ class VoivodeshipServiceImplTest {
 
   @Test
   void shouldReturnVoivodeshipById() {
-    when(voivodeshipRepository.findById(anyLong())).thenReturn(Optional.of(VoivodeshipStub.ds()));
+    when(voivodeshipRepository.findById(anyLong())).thenReturn(Optional.of(VoivodeshipStub.ds));
 
     VoivodeshipDto result = voivodeshipService.getVoivodeshipById(1L);
 
@@ -68,7 +68,7 @@ class VoivodeshipServiceImplTest {
 
   @Test
   void shouldReturnVoivodeshipByIdFromCache() {
-    when(voivodeshipRepository.findById(anyLong())).thenReturn(Optional.of(VoivodeshipStub.ds()));
+    when(voivodeshipRepository.findById(anyLong())).thenReturn(Optional.of(VoivodeshipStub.ds));
 
     VoivodeshipDto result1 = voivodeshipService.getVoivodeshipById(1L);
     VoivodeshipDto result2 = voivodeshipService.getVoivodeshipById(1L);
@@ -92,9 +92,9 @@ class VoivodeshipServiceImplTest {
   @Test
   void shouldReturnVoivodeshipByCode() {
     when(voivodeshipRepository.findByCodeIgnoreCase(anyString()))
-        .thenReturn(Optional.of(VoivodeshipStub.ds()));
+        .thenReturn(Optional.of(VoivodeshipStub.ds));
 
-    VoivodeshipDto result = voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds().getCode());
+    VoivodeshipDto result = voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds.getCode());
 
     assertThat(result).isNotNull();
     assertThat(result).isEqualTo(VoivodeshipStub.dsDto());
@@ -103,12 +103,10 @@ class VoivodeshipServiceImplTest {
   @Test
   void shouldReturnVoivodeshipByCodeFromCache() {
     when(voivodeshipRepository.findByCodeIgnoreCase(anyString()))
-        .thenReturn(Optional.of(VoivodeshipStub.ds()));
+        .thenReturn(Optional.of(VoivodeshipStub.ds));
 
-    VoivodeshipDto result1 =
-        voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds().getCode());
-    VoivodeshipDto result2 =
-        voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds().getCode());
+    VoivodeshipDto result1 = voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds.getCode());
+    VoivodeshipDto result2 = voivodeshipService.getVoivodeshipByCode(VoivodeshipStub.ds.getCode());
 
     assertThat(result1).isNotNull();
     assertThat(result1).isEqualTo(VoivodeshipStub.dsDto());

@@ -2,7 +2,6 @@ package dev.lukaszmichalak.regionalproducts.statistics;
 
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
 import jakarta.transaction.Transactional;
-
 import java.time.Clock;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +32,5 @@ class StatisticsService {
               statistics.setCount(1);
               statisticsRepository.save(statistics);
             });
-    
   }
 }

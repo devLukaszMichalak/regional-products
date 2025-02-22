@@ -30,21 +30,11 @@ public class ProductStub {
           BigDecimal.valueOf(4));
 
   public static ProductDto wineDto() {
-    return new ProductDto(
-        wine.getId(),
-        wine.getName(),
-        wine.getProductType().getName(),
-        wine.getDateOfEntry(),
-        wine.getAverageRating().doubleValue());
+    return ProductMapper.toDto(wine);
   }
 
   public static ProductDto honeyDto() {
-    return new ProductDto(
-        honey.getId(),
-        honey.getName(),
-        honey.getProductType().getName(),
-        honey.getDateOfEntry(),
-        honey.getAverageRating().doubleValue());
+    return ProductMapper.toDto(honey);
   }
 
   public static long count = 2L;

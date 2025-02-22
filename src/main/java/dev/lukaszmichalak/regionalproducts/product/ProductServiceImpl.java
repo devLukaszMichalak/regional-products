@@ -2,7 +2,6 @@ package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.product.exception.ProductNotFoundException;
-
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +12,12 @@ import org.springframework.stereotype.Service;
 class ProductServiceImpl implements ProductService {
 
   private final ProductRepository productRepository;
-  private final ProductMapper productMapper;
 
   @Override
   public ProductDto getProductById(Long id) {
     return productRepository
         .findById(id)
-        .map(productMapper::toDto)
+        .map(ProductMapper::toDto)
         .orElseThrow(() -> new ProductNotFoundException(id));
   }
 
@@ -27,19 +25,19 @@ class ProductServiceImpl implements ProductService {
   public ProductDto getProductByName(String name) {
     return productRepository
         .findByName(name)
-        .map(productMapper::toDto)
+        .map(ProductMapper::toDto)
         .orElseThrow(() -> new ProductNotFoundException(name));
   }
 
   @Override
   public List<ProductDto> getProducts() {
-    return productRepository.findAll().stream().map(productMapper::toDto).toList();
+    return productRepository.findAll().stream().map(ProductMapper::toDto).toList();
   }
 
   @Override
   public List<ProductDto> getProductsOfVoivodeship(Long voivodeshipId) {
     return productRepository.findByVoivodeshipId(voivodeshipId).stream()
-        .map(productMapper::toDto)
+        .map(ProductMapper::toDto)
         .toList();
   }
 
@@ -52,10 +50,13 @@ class ProductServiceImpl implements ProductService {
   public long getProductsCount() {
     return productRepository.count();
   }
-  
+
   @Override
   public void updateAverageRating(Long productId, BigDecimal averageRating) {
-    Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(productId));
+    Product product =
+        productRepository
+            .findById(productId)
+            .orElseThrow(() -> new ProductNotFoundException(productId));
     product.setAverageRating(averageRating);
     productRepository.save(product);
   }

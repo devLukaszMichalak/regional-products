@@ -2,7 +2,6 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
 import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
-
 import java.time.Clock;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Qualifier;

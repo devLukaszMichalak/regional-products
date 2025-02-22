@@ -57,7 +57,8 @@ class VoivodeshipControllerMockitoTest {
     var products = List.of(ProductStub.honeyDto(), ProductStub.wineDto());
     doReturn(products).when(productService).getProductsOfVoivodeship(VoivodeshipStub.dsDto().id());
 
-    String returnValue = voivodeshipsController.getVoivodeship(model, VoivodeshipStub.dsDto().code());
+    String returnValue =
+        voivodeshipsController.getVoivodeship(model, VoivodeshipStub.dsDto().code());
 
     assertThat(returnValue).isEqualTo("voivodeship");
     verify(voivodeshipService).getVoivodeshipByCode(VoivodeshipStub.dsDto().code());

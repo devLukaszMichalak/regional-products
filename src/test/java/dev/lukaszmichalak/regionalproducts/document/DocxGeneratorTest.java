@@ -36,7 +36,7 @@ class DocxGeneratorTest {
 
     byte[] expectedDocx = Files.readAllBytes(expectedDocxPath);
     String expectedDocxString = tika.parseToString(new ByteArrayInputStream(expectedDocx));
-    
+
     assertThat(docxString).isNotBlank();
     assertThat(docxString).isEqualTo(expectedDocxString);
   }
