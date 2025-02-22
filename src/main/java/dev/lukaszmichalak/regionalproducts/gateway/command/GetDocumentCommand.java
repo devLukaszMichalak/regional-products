@@ -1,3 +1,8 @@
 package dev.lukaszmichalak.regionalproducts.gateway.command;
 
-public record GetDocumentCommand(String lang, String code) {}
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
+public record GetDocumentCommand(
+    @NotNull @Pattern(regexp = "^(?:pl|en)$") String lang,
+    @NotNull @Pattern(regexp = "^[A-Z]{2}$") String code) {}

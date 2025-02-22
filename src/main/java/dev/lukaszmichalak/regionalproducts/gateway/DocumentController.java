@@ -2,6 +2,7 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
 import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import jakarta.validation.Valid;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,7 +53,7 @@ class DocumentController {
   }
 
   @GetMapping("/docx/voivodeship/{code}")
-  public ResponseEntity<byte[]> getDocx(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getDocx(@Valid @ModelAttribute("cmd") GetDocumentCommand cmd) {
     byte[] documentBytes = docxGenerator.createForVoivodeship(cmd);
 
     HttpHeaders headers = new HttpHeaders();
@@ -65,7 +66,7 @@ class DocumentController {
   }
 
   @GetMapping("/pdf/voivodeship/{code}")
-  public ResponseEntity<byte[]> getPdf(@ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getPdf(@Valid @ModelAttribute("cmd") GetDocumentCommand cmd) {
     byte[] documentBytes = pdfGenerator.createForVoivodeship(cmd);
 
     HttpHeaders headers = new HttpHeaders();
