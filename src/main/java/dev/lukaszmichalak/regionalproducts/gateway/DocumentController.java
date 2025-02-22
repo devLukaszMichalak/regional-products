@@ -1,7 +1,8 @@
 package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
-import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetPolandDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetVoivodeshipDocumentCommand;
 import jakarta.validation.Valid;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -27,8 +28,9 @@ class DocumentController {
   }
 
   @GetMapping("/docx/all")
-  public ResponseEntity<byte[]> getDocx(@PathVariable("lang") String lang) {
-    byte[] documentBytes = docxGenerator.createForAll(lang);
+  public ResponseEntity<byte[]> getDocx(
+      @Valid @ModelAttribute("cmd") GetPolandDocumentCommand cmd) {
+    byte[] documentBytes = docxGenerator.createForAll(cmd);
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_DOCX);
@@ -40,8 +42,8 @@ class DocumentController {
   }
 
   @GetMapping("/pdf/all")
-  public ResponseEntity<byte[]> getPdf(@PathVariable("lang") String lang) {
-    byte[] documentBytes = pdfGenerator.createForAll(lang);
+  public ResponseEntity<byte[]> getPdf(@Valid @ModelAttribute("cmd") GetPolandDocumentCommand cmd) {
+    byte[] documentBytes = pdfGenerator.createForAll(cmd);
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PDF);
@@ -53,7 +55,8 @@ class DocumentController {
   }
 
   @GetMapping("/docx/voivodeship/{code}")
-  public ResponseEntity<byte[]> getDocx(@Valid @ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getDocx(
+      @Valid @ModelAttribute("cmd") GetVoivodeshipDocumentCommand cmd) {
     byte[] documentBytes = docxGenerator.createForVoivodeship(cmd);
 
     HttpHeaders headers = new HttpHeaders();
@@ -66,7 +69,8 @@ class DocumentController {
   }
 
   @GetMapping("/pdf/voivodeship/{code}")
-  public ResponseEntity<byte[]> getPdf(@Valid @ModelAttribute("cmd") GetDocumentCommand cmd) {
+  public ResponseEntity<byte[]> getPdf(
+      @Valid @ModelAttribute("cmd") GetVoivodeshipDocumentCommand cmd) {
     byte[] documentBytes = pdfGenerator.createForVoivodeship(cmd);
 
     HttpHeaders headers = new HttpHeaders();

@@ -3,7 +3,8 @@ package dev.lukaszmichalak.regionalproducts.document;
 import static org.vandeseer.easytable.settings.HorizontalAlignment.*;
 
 import dev.lukaszmichalak.regionalproducts.document.exception.DocumentGenerationException;
-import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetPolandDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetVoivodeshipDocumentCommand;
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
@@ -27,7 +28,7 @@ class PdfGenerator implements DocumentGenerator {
   private final PdfGenerationContextFactory pdfGenerationContextFactory;
 
   @Override
-  public byte[] createForVoivodeship(GetDocumentCommand cmd) {
+  public byte[] createForVoivodeship(GetVoivodeshipDocumentCommand cmd) {
 
     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PDDocument document = new PDDocument()) {
@@ -43,12 +44,12 @@ class PdfGenerator implements DocumentGenerator {
   }
 
   @Override
-  public byte[] createForAll(String lang) {
+  public byte[] createForAll(GetPolandDocumentCommand cmd) {
     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PDDocument document = new PDDocument()) {
 
       PdfGenerationContext pdfGenerationContext =
-          pdfGenerationContextFactory.forAll(document, lang);
+          pdfGenerationContextFactory.forAll(document, cmd.lang());
 
       return generatePdf(pdfGenerationContext, outputStream);
 

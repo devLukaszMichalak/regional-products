@@ -1,7 +1,8 @@
 package dev.lukaszmichalak.regionalproducts.document;
 
 import dev.lukaszmichalak.regionalproducts.document.exception.DocumentGenerationException;
-import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetPolandDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetVoivodeshipDocumentCommand;
 import dev.lukaszmichalak.regionalproducts.product.ProductService;
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.voivodeship.VoivodeshipService;
@@ -21,7 +22,7 @@ class DocxGenerator implements DocumentGenerator {
   private final PolandDescriptionService polandDescriptionService;
 
   @Override
-  public byte[] createForVoivodeship(GetDocumentCommand cmd) {
+  public byte[] createForVoivodeship(GetVoivodeshipDocumentCommand cmd) {
 
     VoivodeshipDto voivodeship = voivodeshipService.getVoivodeshipByCode(cmd.code());
     List<ProductDto> products = productService.getProductsOfVoivodeship(voivodeship.id());
@@ -43,18 +44,18 @@ class DocxGenerator implements DocumentGenerator {
   }
 
   @Override
-  public byte[] createForAll(String lang) {
+  public byte[] createForAll(GetPolandDocumentCommand cmd) {
 
     List<ProductDto> products = productService.getProducts();
 
     try (XWPFDocument document = new XWPFDocument();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
 
-      addTitle(document, isPL(lang) ? "Polska" : "Poland");
+      addTitle(document, isPL(cmd.lang()) ? "Polska" : "Poland");
       addDescription(
           document,
-          isPL(lang) ? polandDescriptionService.getPl() : polandDescriptionService.getEn());
-      addProductTable(document, products, lang);
+          isPL(cmd.lang()) ? polandDescriptionService.getPl() : polandDescriptionService.getEn());
+      addProductTable(document, products, cmd.lang());
 
       document.write(outputStream);
       return outputStream.toByteArray();

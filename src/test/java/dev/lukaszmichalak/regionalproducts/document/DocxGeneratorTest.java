@@ -2,7 +2,7 @@ package dev.lukaszmichalak.regionalproducts.document;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetVoivodeshipDocumentCommand;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +25,7 @@ class DocxGeneratorTest {
   @ValueSource(strings = {"pl", "en"})
   void createForVoivodeship(String lang) throws TikaException, IOException {
 
-    byte[] docx = docxGenerator.createForVoivodeship(new GetDocumentCommand(lang, "DS"));
+    byte[] docx = docxGenerator.createForVoivodeship(new GetVoivodeshipDocumentCommand(lang, "DS"));
     String docxString = tika.parseToString(new ByteArrayInputStream(docx));
 
     var expectedDocxPath = Path.of(EXPECTED_DOCX_PATH_TEMPLATE.replace("{lang}", lang));

@@ -15,7 +15,7 @@ class LocaleControllerAdvice {
   public void addLang(
       Model model,
       HttpServletRequest request,
-      @PathVariable(name = "lang", required = false) @Nullable String lang) {
+      @Nullable @PathVariable(name = "lang", required = false) String lang) {
 
     model.addAttribute("lang", Objects.requireNonNullElse(lang, "en"));
 

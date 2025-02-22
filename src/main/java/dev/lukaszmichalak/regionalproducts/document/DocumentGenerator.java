@@ -1,9 +1,10 @@
 package dev.lukaszmichalak.regionalproducts.document;
 
-import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetPolandDocumentCommand;
+import dev.lukaszmichalak.regionalproducts.gateway.command.GetVoivodeshipDocumentCommand;
 
 public interface DocumentGenerator {
-  byte[] createForVoivodeship(GetDocumentCommand cmd);
+  byte[] createForVoivodeship(GetVoivodeshipDocumentCommand cmd);
 
-  byte[] createForAll(String lang);
+  byte[] createForAll(GetPolandDocumentCommand lang);
 }
