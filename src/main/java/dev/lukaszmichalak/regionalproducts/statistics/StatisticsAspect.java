@@ -7,9 +7,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Aspect
 @Component
-@Slf4j
 @RequiredArgsConstructor
 class StatisticsAspect {
 
