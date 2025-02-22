@@ -2,6 +2,8 @@ package dev.lukaszmichalak.regionalproducts.gateway;
 
 import dev.lukaszmichalak.regionalproducts.document.DocumentGenerator;
 import dev.lukaszmichalak.regionalproducts.gateway.command.GetDocumentCommand;
+
+import java.time.Clock;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
@@ -13,12 +15,15 @@ class DocumentController {
 
   private final DocumentGenerator docxGenerator;
   private final DocumentGenerator pdfGenerator;
+  private final Clock clock;
 
   DocumentController(
       @Qualifier("docxGenerator") DocumentGenerator docxGenerator,
-      @Qualifier("pdfGenerator") DocumentGenerator pdfGenerator) {
+      @Qualifier("pdfGenerator") DocumentGenerator pdfGenerator,
+      Clock clock) {
     this.docxGenerator = docxGenerator;
     this.pdfGenerator = pdfGenerator;
+    this.clock = clock;
   }
 
   @GetMapping("/docx/all")
@@ -28,7 +33,7 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_DOCX);
 
-    var filename = "PL-" + LocalDateTime.now() + ".docx";
+    var filename = "PL-" + LocalDateTime.now(clock) + ".docx";
     headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
@@ -41,7 +46,7 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PDF);
 
-    var filename = "PL-" + LocalDateTime.now() + ".pdf";
+    var filename = "PL-" + LocalDateTime.now(clock) + ".pdf";
     headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
@@ -54,7 +59,7 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_DOCX);
 
-    var filename = cmd.code() + "-" + LocalDateTime.now() + ".docx";
+    var filename = cmd.code() + "-" + LocalDateTime.now(clock) + ".docx";
     headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
@@ -67,7 +72,7 @@ class DocumentController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PDF);
 
-    var filename = cmd.code() + "-" + LocalDateTime.now() + ".pdf";
+    var filename = cmd.code() + "-" + LocalDateTime.now(clock) + ".pdf";
     headers.setContentDisposition(ContentDisposition.formData().filename(filename).build());
 
     return new ResponseEntity<>(documentBytes, headers, HttpStatus.OK);
