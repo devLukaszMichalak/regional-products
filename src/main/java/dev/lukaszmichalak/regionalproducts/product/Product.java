@@ -1,7 +1,7 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
-import dev.lukaszmichalak.regionalproducts.converter.LocalDateConverter;
-import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
+import dev.lukaszmichalak.regionalproducts.common.converter.LocalDateConverter;
+import dev.lukaszmichalak.regionalproducts.common.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;

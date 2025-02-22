@@ -1,6 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
-import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
+import dev.lukaszmichalak.regionalproducts.common.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
