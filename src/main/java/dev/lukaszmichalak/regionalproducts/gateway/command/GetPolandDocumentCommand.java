@@ -1,6 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.gateway.command;
 
+import dev.lukaszmichalak.regionalproducts.validation.ValidLanguage;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
-public record GetPolandDocumentCommand(@NotNull @Pattern(regexp = "^(?:pl|en)$") String lang) {}
+public record GetPolandDocumentCommand(@NotNull @ValidLanguage String lang) {}
