@@ -1,10 +1,12 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
+import dev.lukaszmichalak.regionalproducts.cache.CacheName;
 import dev.lukaszmichalak.regionalproducts.product.dto.ProductDto;
 import dev.lukaszmichalak.regionalproducts.product.exception.ProductNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,11 +44,13 @@ class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  @Cacheable(CacheName.PRODUCT_SERVICE_COUNT_PRODUCTS_OF_VOIVODESHIP)
   public long countProductsOfVoivodeship(Long voivodeshipId) {
     return productRepository.countByVoivodeshipId(voivodeshipId);
   }
 
   @Override
+  @Cacheable(CacheName.PRODUCT_SERVICE_GET_PRODUCT_COUNT)
   public long getProductsCount() {
     return productRepository.count();
   }
