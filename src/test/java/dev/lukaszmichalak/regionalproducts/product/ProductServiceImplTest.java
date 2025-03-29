@@ -135,23 +135,23 @@ class ProductServiceImplTest {
 
   @Test
   void shouldUpdateAverageRating() {
-    when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+    when(productRepository.findWithoutRelationsById(1L)).thenReturn(Optional.of(product));
     when(productRepository.save(any(Product.class))).thenReturn(product);
 
     productService.updateAverageRating(1L, BigDecimal.valueOf(4.0));
 
     assertThat(product.getAverageRating()).isEqualTo(BigDecimal.valueOf(4.0));
-    verify(productRepository).findById(1L);
+    verify(productRepository).findWithoutRelationsById(1L);
     verify(productRepository).save(product);
   }
 
   @Test
   void shouldThrowExceptionWhenUpdatingRatingOfNonExistingProduct() {
-    when(productRepository.findById(1L)).thenReturn(Optional.empty());
+    when(productRepository.findWithoutRelationsById(1L)).thenReturn(Optional.empty());
 
     assertThatThrownBy(() -> productService.updateAverageRating(1L, BigDecimal.valueOf(4.0)))
         .isInstanceOf(ProductNotFoundException.class);
-    verify(productRepository).findById(1L);
+    verify(productRepository).findWithoutRelationsById(1L);
     verify(productRepository, never()).save(any(Product.class));
   }
 }

@@ -59,7 +59,7 @@ class ProductServiceImpl implements ProductService {
   public void updateAverageRating(Long productId, BigDecimal averageRating) {
     Product product =
         productRepository
-            .findById(productId)
+            .findWithoutRelationsById(productId)
             .orElseThrow(() -> new ProductNotFoundException(productId));
     product.setAverageRating(averageRating);
     productRepository.save(product);
