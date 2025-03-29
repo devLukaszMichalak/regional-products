@@ -1,7 +1,6 @@
 package dev.lukaszmichalak.regionalproducts.product;
 
 import dev.lukaszmichalak.regionalproducts.converter.LocalDateConverter;
-import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -36,7 +35,6 @@ class Product {
   @Column(name = "date_of_entry", nullable = false)
   private LocalDate dateOfEntry;
 
-  @Convert(converter = LocalDateTimeConverter.class)
   @Column(name = "creation_date", nullable = false, insertable = false, updatable = false)
   private LocalDateTime creationDate;
 

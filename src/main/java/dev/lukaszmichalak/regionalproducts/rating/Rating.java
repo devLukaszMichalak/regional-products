@@ -1,6 +1,5 @@
 package dev.lukaszmichalak.regionalproducts.rating;
 
-import dev.lukaszmichalak.regionalproducts.converter.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -28,7 +27,6 @@ class Rating {
   @Column(name = "rating", nullable = false)
   private Integer rating;
 
-  @Convert(converter = LocalDateTimeConverter.class)
   @Column(name = "creation_date", nullable = false, insertable = false, updatable = false)
   private LocalDateTime creationDate;
 

@@ -12,7 +12,7 @@ interface ProductRepository extends ListCrudRepository<Product, Long> {
   @Override
   @EntityGraph(attributePaths = {"productType"})
   Optional<Product> findById(@NonNull Long id);
-  
+
   Optional<Product> findWithoutRelationsById(@NonNull Long id);
 
   @NonNull
