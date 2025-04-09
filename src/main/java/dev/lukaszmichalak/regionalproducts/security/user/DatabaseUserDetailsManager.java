@@ -4,7 +4,6 @@ import dev.lukaszmichalak.regionalproducts.security.user.exceptions.PasswordChan
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 class DatabaseUserDetailsManager implements UserDetailsManager {
 
   private final UserRepository userRepository;
-  private final PasswordEncoder passwordEncoder;
 
   @Override
   public void createUser(UserDetails user) {
