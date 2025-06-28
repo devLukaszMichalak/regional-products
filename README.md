@@ -94,3 +94,17 @@ https://github.com/user-attachments/assets/8c8d58a2-f4ae-49fd-9dd7-40779aa94e7c
 ### Login update
 
 https://github.com/user-attachments/assets/1428d51f-10e0-4636-95f2-1840f27b7be5
+
+## Running with Docker
+
+### Prerequisites
+- Docker and Docker Compose installed on your system
+
+### Using Docker Compose (Recommended)
+1. Clone the repository
+2. Navigate to the project directory
+3. Run the application using Docker Compose:
+   ```
+   docker compose up
+   ```
+4. Access the application at http://localhost:8080
